@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/02/29 17:10:47 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/02/29 18:02:08 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,6 @@ CC = gcc
 LD = ld
 
 NASM = nasm
-
-BOOT = boot/boot.asm
-
-BOOT_OBJ = boot/boot.o
 
 RM = rm
 
@@ -37,25 +33,24 @@ CFLAGS = -fno-builtin \
 		 -Wextra\
 		 -g3
 
+BOOT = boot/boot.asm
+BOOT_OBJ = boot/boot.o
+
+
 .PHONY: all run boot
 
 all: boot
 
+boot : $(BOOT_OBJ)
+	$(NASM) -f elf32 $(BOOT) -o $(BOOT_OBJ)
+
 %.o : %.asm
-	@$(NASM) -f elf32 -g -F dwarf $< -o $@
+	$(NASM) -f elf32 -g -F dwarf $< -o $@
 
-	
-boot : $(BOOT)
-	@echo " \033[0;31mAssembling $(BOOT)...\033[0m"
-	@$(NASM) -f elf32 $(BOOT) -o $(BOOT_OBJ)
-	@echo " \033[0;32mSuccess\033[0m"
+# link:
 
 
-
-link:
-
-
-iso:
+# iso:
 
 
 clean:

@@ -15,7 +15,7 @@ start:
     xor ebp, ebp
     mov esp, stack_space            ; Stack pointer
     push ebx
-    call start                       ; Main call
+    call main                       ; Main call
     jmp .1
 .1:
     hlt

@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/04 14:45:13 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/04 15:35:04 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,6 @@ link: $(BOOT_OBJ) $(OBJ)
 	$(LD) -m elf_i386 -T boot/linker.ld boot/kernel.o -o $(BIN) $(BOOT_OBJ)
 
 iso:
-	grub-file --is-x86-multiboot $(BIN)
 	mkdir -pv $(ISO_DIR)/boot/grub
 	cp $(BIN) $(ISO_DIR)/boot/$(BIN)
 	cp $(CFG) $(ISO_DIR)/boot/grub/grub.cfg
@@ -82,5 +81,8 @@ fclean: clean
 
 re: fclean all
 
-run: #requires creation of ISO to run
+run:
 	qemu-system-i386 -cdrom $(ISO)
+
+kernel:
+	qemu-system-i386 -kernel $(BIN)

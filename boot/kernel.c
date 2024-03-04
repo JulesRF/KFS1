@@ -1,3 +1,4 @@
-void _start() {
-    for (;;);
+int main(void) 
+{
+    for(;;);
 }

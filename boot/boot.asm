@@ -13,8 +13,15 @@ start:
     cli                             ; Clear interrupts
     sti
     xor ebp, ebp
-    call main                       ; Main call
+    mov esp, stack_space            ; Stack pointer
+    push ebx
+    call start                       ; Main call
     jmp .1
 .1:
     hlt
     ; hlt                           ; Halt CPU
+
+section .bss
+    ; resb 8192                     ; stack size : 8KB
+    resb 4096                       ; stack size : 4KB
+stack_space:

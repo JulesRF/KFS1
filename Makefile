@@ -6,11 +6,15 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/02/29 18:02:08 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/04 14:45:13 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = kfs
+
+BIN = $(NAME).bin
+
+ISO_DIR = iso
 
 ISO = $(NAME).iso
 
@@ -23,49 +27,60 @@ NASM = nasm
 RM = rm
 
 CFLAGS = -fno-builtin \
-		 -fno-exception \
+		 -fno-exceptions \
 		 -fno-stack-protector \
-		 -fno-rtti \
 		 -nostdlib \
 		 -nodefaultlibs \
-		 -Wall\
-		 -Werror\
-		 -Wextra\
-		 -g3
-
+		 -Wall \
+		 -Werror \
+		 -Wextra \
+		 -g3 \
+		 -m32
+		 
+CFG = boot/grub/grub.cfg
 BOOT = boot/boot.asm
 BOOT_OBJ = boot/boot.o
-
+OBJ = boot/kernel.o
 
 .PHONY: all run boot
 
-all: boot
+all: boot $(OBJ) link iso 
 
 boot : $(BOOT_OBJ)
 	$(NASM) -f elf32 $(BOOT) -o $(BOOT_OBJ)
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 %.o : %.asm
 	$(NASM) -f elf32 -g -F dwarf $< -o $@
 
-# link:
+link: $(BOOT_OBJ) $(OBJ) 
+	$(LD) -m elf_i386 -T boot/linker.ld boot/kernel.o -o $(BIN) $(BOOT_OBJ)
 
-
-# iso:
-
+iso:
+	grub-file --is-x86-multiboot $(BIN)
+	mkdir -pv $(ISO_DIR)/boot/grub
+	cp $(BIN) $(ISO_DIR)/boot/$(BIN)
+	cp $(CFG) $(ISO_DIR)/boot/grub/grub.cfg
+	grub-mkrescue -o $(ISO) $(ISO_DIR)
 
 clean:
 	@echo " \033[0;31mCleaning objects!\033[30m"
-	$(RM) -f $(BOOT_OBJ) "\033[0m"
+	$(RM) -f $(BOOT_OBJ)
+	$(RM) -f $(OBJ)
 	@echo " \033[0;32mObjects eliminated!\033[0m"
 		
-
 fclean: clean
-	@echo " \033[0;31mNow let's deep clean.\033[0m"
+	@echo " \033[0;31mNow let's deep clean.\033[30m"
+	$(RM) -f $(BIN)
+	$(RM) -f $(ISO_DIR)/boot/$(BIN)
+	$(RM) -f $(ISO_DIR)/boot/grub/$(CFG)
+	$(RM) -rf $(ISO_DIR)
+	$(RM) -f $(NAME).iso
 	@echo " \033[0;32mDone.\033[0m"
-
-		
 
 re: fclean all
 
 run: #requires creation of ISO to run
-	qemu-system-i386 -cdrom $(ISO) -cpu host
+	qemu-system-i386 -cdrom $(ISO)

@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/05 18:00:01 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/05 18:05:11 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ boot : $(BOOT_OBJ)
 # 	$(CC) $(CFLAGS) -I $(CHEADER) -c $< -o $@
 # 	@echo "apres"
 
-%.o: %.c $(HFILES)
+%.o: $(CFILES)/%.c
 	@echo "avant"
 	$(CC) $(CFLAGS) -I$(CHEADER) -c $< -o $@
 	@echo "apres"

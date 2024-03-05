@@ -45,7 +45,7 @@ void print_char(char str, unsigned char color)
     
 }
 
-void	main(void)
+int	main(void)
 {
 	terminal_buffer = (unsigned short*)VGA_ADDRESS;
 	vga_index = 0;
@@ -55,8 +55,10 @@ void	main(void)
     vga_index = 80;
     print_string("Version 1", RED);
     vga_index = 160;
-    print_char('b', RED);
+    print_char('4', RED);
+    print_char('2', YELLOW);
     vga_index = 240;
 
-	return ;
+    while(1);
+    return 0 ;
 }

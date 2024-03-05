@@ -1,6 +1,5 @@
 #ifndef PRINT_H
 # define PRINT_H
-#include "kernel.h"
 
 # define VGA_ADDRESS 0xB8000
 
@@ -20,6 +19,9 @@
 # define L_MAGENTA 13
 # define YELLOW 14
 # define WHITE 15
+
+unsigned short* terminal_buffer;
+unsigned int vga_index;
 
 void clear_screen(void);
 void print_string(char* str, unsigned char color);

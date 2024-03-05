@@ -1,4 +1,3 @@
-#include "kernel.h"
 #include "print.h"
 
 int	main(void)

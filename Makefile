@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/05 16:05:01 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/05 16:25:56 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,9 +44,13 @@ CHEADER = boot/source/print.h
 		 
 		 
 CFG = boot/grub/grub.cfg
+
 BOOT = boot/boot.asm
+
 BOOT_OBJ = boot/boot.o
-OBJ = boot/source/kernel.o
+
+OBJ = boot/source/kernel.o \
+	  boot/source/print.o
 
 .PHONY: all run boot
 
@@ -62,7 +66,7 @@ boot : $(BOOT_OBJ)
 	$(NASM) -f elf32 -g -F dwarf $< -o $@
 
 link: $(BOOT_OBJ) $(OBJ) 
-	$(LD) -m elf_i386 -T boot/linker.ld boot/source/kernel.o -o $(BIN) $(BOOT_OBJ)
+	$(LD) -m elf_i386 -T boot/linker.ld $(OBJ) -o $(BIN) $(BOOT_OBJ)
 
 iso:
 	mkdir -pv $(ISO_DIR)/boot/grub

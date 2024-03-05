@@ -56,8 +56,8 @@ all: boot $(OBJ) link iso
 boot : $(BOOT_OBJ)
 	$(NASM) -f elf32 $(BOOT) -o $(BOOT_OBJ)
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(CFILES) -I $(CHEADER) -c $< -o $@
+%.o: ${CFILES}/%.c
+	$(CC) $(CFLAGS) -I $(CHEADER) -c $< -o $@
 
 %.o : %.asm
 	$(NASM) -f elf32 -g -F dwarf $< -o $@

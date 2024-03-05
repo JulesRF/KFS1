@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/05 16:25:56 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/05 18:00:01 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ CFLAGS = -fno-builtin \
 CFILES = boot/source/kernel.c \
 		 boot/source/print.c
 
-CHEADER = boot/source/print.h
+CHEADER = boot/source/include
 		 
 		 
 CFG = boot/grub/grub.cfg
@@ -52,20 +52,29 @@ BOOT_OBJ = boot/boot.o
 OBJ = boot/source/kernel.o \
 	  boot/source/print.o
 
-.PHONY: all run boot
+COBJS = $(patsubst %.c,%.o,$(SRCS))
+
+.PHONY: all boot link iso clean fclean run kernel
 
 all: boot $(OBJ) link iso 
 
 boot : $(BOOT_OBJ)
 	$(NASM) -f elf32 $(BOOT) -o $(BOOT_OBJ)
 
-%.o: ${CFILES}/%.c
-	$(CC) $(CFLAGS) -I $(CHEADER) -c $< -o $@
+# %.o: ${CFILES}/%.c
+# 	@echo "avant"
+# 	$(CC) $(CFLAGS) -I $(CHEADER) -c $< -o $@
+# 	@echo "apres"
+
+%.o: %.c $(HFILES)
+	@echo "avant"
+	$(CC) $(CFLAGS) -I$(CHEADER) -c $< -o $@
+	@echo "apres"
 
 %.o : %.asm
 	$(NASM) -f elf32 -g -F dwarf $< -o $@
 
-link: $(BOOT_OBJ) $(OBJ) 
+link: $(BOOT_OBJ) $(OBJ)
 	$(LD) -m elf_i386 -T boot/linker.ld $(OBJ) -o $(BIN) $(BOOT_OBJ)
 
 iso:

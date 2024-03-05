@@ -40,8 +40,7 @@ CFLAGS = -fno-builtin \
 CFILES = boot/source/kernel.c \
 		 boot/source/print.c
 
-CHEADER = boot/source/kernel.h \
-		  boot/source/print.h
+CHEADER = boot/source/print.h
 		 
 		 
 CFG = boot/grub/grub.cfg

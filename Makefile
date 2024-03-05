@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/04 15:50:39 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/05 16:05:01 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,18 @@ CFLAGS = -fno-builtin \
 		 -Wextra \
 		 -g3 \
 		 -m32
+
+CFILES = boot/source/kernel.c \
+		 boot/source/print.c
+
+CHEADER = boot/source/kernel.h \
+		  boot/source/print.h
+		 
 		 
 CFG = boot/grub/grub.cfg
 BOOT = boot/boot.asm
 BOOT_OBJ = boot/boot.o
-OBJ = boot/kernel.o
+OBJ = boot/source/kernel.o
 
 .PHONY: all run boot
 
@@ -50,13 +57,13 @@ boot : $(BOOT_OBJ)
 	$(NASM) -f elf32 $(BOOT) -o $(BOOT_OBJ)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CFILES) -I $(CHEADER) -c $< -o $@
 
 %.o : %.asm
 	$(NASM) -f elf32 -g -F dwarf $< -o $@
 
 link: $(BOOT_OBJ) $(OBJ) 
-	$(LD) -m elf_i386 -T boot/linker.ld boot/kernel.o -o $(BIN) $(BOOT_OBJ)
+	$(LD) -m elf_i386 -T boot/linker.ld boot/source/kernel.o -o $(BIN) $(BOOT_OBJ)
 
 iso:
 	mkdir -pv $(ISO_DIR)/boot/grub

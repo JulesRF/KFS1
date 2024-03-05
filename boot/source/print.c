@@ -1,18 +1,4 @@
-// int main(void) 
-// {
-//     for(;;);
-// }
-
-#define VGA_ADDRESS 0xB8000
-
-#define BLACK 0
-#define GREEN 2
-#define RED 4
-#define YELLOW 14
-#define WHITE_COLOR 15
-
-unsigned short* terminal_buffer;
-unsigned int vga_index;
+#include "print.h"
 
 void clear_screen(void)
 {
@@ -43,22 +29,4 @@ void print_char(char str, unsigned char color)
     index++;
     vga_index++;
     
-}
-
-int	main(void)
-{
-	terminal_buffer = (unsigned short*)VGA_ADDRESS;
-	vga_index = 0;
-
-	clear_screen();
-	print_string("Hello world!", YELLOW);
-    vga_index = 80;
-    print_string("Version 1", RED);
-    vga_index = 160;
-    print_char('4', RED);
-    print_char('2', YELLOW);
-    vga_index = 240;
-
-    while(1);
-    return 0 ;
 }

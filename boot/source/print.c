@@ -1,5 +1,8 @@
 #include "include/print.h"
 
+unsigned short *terminal_buffer;
+unsigned int    vga_index;
+
 void clear_screen(void)
 {
     int index = 0;

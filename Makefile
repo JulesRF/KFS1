@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/05 18:05:11 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/07 15:48:51 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,44 +40,40 @@ CFLAGS = -fno-builtin \
 CFILES = boot/source/kernel.c \
 		 boot/source/print.c
 
-CHEADER = boot/source/include
-		 
+OBJ = $(CFILES:.c=.o)
+
+CHEADER = boot/source/include/
 		 
 CFG = boot/grub/grub.cfg
 
 BOOT = boot/boot.asm
 
-BOOT_OBJ = boot/boot.o
+BOOT_OBJ = $(BOOT:.asm=.o)
 
-OBJ = boot/source/kernel.o \
-	  boot/source/print.o
-
-COBJS = $(patsubst %.c,%.o,$(SRCS))
+LINKER = boot/linker.ld
 
 .PHONY: all boot link iso clean fclean run kernel
 
 all: boot $(OBJ) link iso 
 
 boot : $(BOOT_OBJ)
+	@echo "\033[0;31mPhase boot\033[0m"
 	$(NASM) -f elf32 $(BOOT) -o $(BOOT_OBJ)
 
-# %.o: ${CFILES}/%.c
-# 	@echo "avant"
-# 	$(CC) $(CFLAGS) -I $(CHEADER) -c $< -o $@
-# 	@echo "apres"
-
-%.o: $(CFILES)/%.c
-	@echo "avant"
-	$(CC) $(CFLAGS) -I$(CHEADER) -c $< -o $@
-	@echo "apres"
+%.o: %.c
+	@echo "\033[0;31mPhase C vers obj\033[0m"
+	$(CC) $(CFLAGS)  -c $< -o $@
 
 %.o : %.asm
+	@echo "\033[0;31mPhase asm vers obj\033[0m"
 	$(NASM) -f elf32 -g -F dwarf $< -o $@
 
 link: $(BOOT_OBJ) $(OBJ)
-	$(LD) -m elf_i386 -T boot/linker.ld $(OBJ) -o $(BIN) $(BOOT_OBJ)
+	@echo "\033[0;31mPhase link\033[0m"
+	$(LD) -m elf_i386 -T $(LINKER) -o $(BIN) $(BOOT_OBJ) $(OBJ)
 
 iso:
+	@echo "\033[0;31mPhase iso\033[0m"
 	mkdir -pv $(ISO_DIR)/boot/grub
 	cp $(BIN) $(ISO_DIR)/boot/$(BIN)
 	cp $(CFG) $(ISO_DIR)/boot/grub/grub.cfg
@@ -100,8 +96,8 @@ fclean: clean
 
 re: fclean all
 
-run:
+run: all
 	qemu-system-i386 -cdrom $(ISO)
 
-kernel:
+kernel: all
 	qemu-system-i386 -kernel $(BIN)

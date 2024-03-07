@@ -20,8 +20,8 @@
 # define YELLOW 14
 # define WHITE 15
 
-unsigned short* terminal_buffer;
-unsigned int vga_index;
+extern unsigned short   *terminal_buffer;
+extern unsigned int     vga_index;
 
 void clear_screen(void);
 void print_string(char* str, unsigned char color);

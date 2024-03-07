@@ -6,13 +6,13 @@ int	main(void)
 	vga_index = 0;
 
 	clear_screen();
-	print_string("Hello world!", YELLOW);
+	print_string("Hello", L_MAGENTA);
+    print_string("World", L_CYAN);
+    print_string("!", GREEN);
     vga_index = 80;
-    print_string("Version 1", RED);
-    vga_index = 160;
     print_char('4', RED);
     print_char('2', YELLOW);
-    vga_index = 240;
+    vga_index = 160;
 
     while(1);
     return 0 ;

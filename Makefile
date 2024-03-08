@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/07 15:48:51 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/08 16:01:48 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ CFLAGS = -fno-builtin \
 		 -m32
 
 CFILES = boot/source/kernel.c \
-		 boot/source/print.c
+		 boot/source/print.c \
+		 boot/source/shell-ter.c \
+		 boot/source/keyboard.c
 
 OBJ = $(CFILES:.c=.o)
 
@@ -96,8 +98,8 @@ fclean: clean
 
 re: fclean all
 
-run: all
+run:
 	qemu-system-i386 -cdrom $(ISO)
 
-kernel: all
+kernel:
 	qemu-system-i386 -kernel $(BIN)

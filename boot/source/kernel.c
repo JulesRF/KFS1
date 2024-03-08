@@ -1,4 +1,4 @@
-#include "include/print.h"
+#include "include/kfs.h"
 
 int	main(void)
 {
@@ -14,6 +14,6 @@ int	main(void)
     print_char('2', YELLOW);
     vga_index = 160;
 
-    while(1);
+    shell_ter();
     return 0 ;
 }

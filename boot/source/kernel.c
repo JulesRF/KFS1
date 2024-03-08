@@ -12,6 +12,7 @@ int	main(void)
     vga_index = 80;
     print_char('4', RED);
     print_char('2', YELLOW);
+    print_char('0' + ft_strlen("salut"), RED);
     vga_index = 160;
 
     shell_ter();

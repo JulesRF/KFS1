@@ -40,7 +40,8 @@ CFLAGS = -fno-builtin \
 CFILES = boot/source/kernel.c \
 		 boot/source/print.c \
 		 boot/source/shell-ter.c \
-		 boot/source/keyboard.c
+		 boot/source/keyboard.c \
+		 boot/source/lib.c
 
 OBJ = $(CFILES:.c=.o)
 

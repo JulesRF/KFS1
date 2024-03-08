@@ -16,5 +16,6 @@
 # include "print.h"
 # include "keyboard.h"
 # include "shell-ter.h"
+# include "lib.h"
 
 #endif

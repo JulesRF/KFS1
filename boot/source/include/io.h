@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell-ter.c                                        :+:      :+:    :+:   */
+/*   io.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 15:33:55 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/08 16:51:49 by rdel-agu         ###   ########.fr       */
+/*   Created: 2024/03/08 17:06:51 by rdel-agu          #+#    #+#             */
+/*   Updated: 2024/03/08 17:10:52 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/kfs.h"
+#ifndef IO_H
+# define IO_H
 
-void shell_ter( void ) {
+# include "kfs.h"
 
-    while(69) {
+uint8   inb(uint16 port);
+void    outb(uint16 port, uint8 value);
 
-        keyboard_handler();
-    }
-}
+
+#endif

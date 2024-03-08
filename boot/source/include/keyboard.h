@@ -6,11 +6,13 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:55:40 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/08 15:55:54 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:51:24 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYBOARD_H
 # define KEYBOARD_H
+
+void keyboard_handler( void );
 
 #endif

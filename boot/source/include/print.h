@@ -27,5 +27,6 @@ void    clear_screen(void);
 void    print_string(char* str, unsigned char color);
 void    print_char(char str, unsigned char color);
 int     ft_isnewl(const char *str, int i);
+void    ft_printerr(char *str);
 
 #endif

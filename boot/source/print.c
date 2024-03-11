@@ -38,8 +38,13 @@ int ft_isnewl(const char *str, int i)
 {
     if (str[i] == '\n')
     {
-        vga_index = vga_index + 80 - i - 1;
+        vga_index = vga_index + 80 - (vga_index % 80) - 1;
         return (1);
     }
     return (0);
+}
+
+void    ft_printerr(char *str)
+{
+    print_string(str, RED);
 }

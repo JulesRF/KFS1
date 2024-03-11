@@ -16,6 +16,7 @@ int	main(void)
     print_char('4', RED);
     print_char('2', YELLOW);
     print_char('0' + ft_strlen("salut"), RED);
+    ft_printerr("\nError\nSegfault");
     // vga_index = 240;
 
     shell_ter();

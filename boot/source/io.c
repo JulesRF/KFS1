@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard.c                                         :+:      :+:    :+:   */
+/*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 15:57:14 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/11 13:09:29 by rdel-agu         ###   ########.fr       */
+/*   Created: 2024/03/11 11:35:00 by rdel-agu          #+#    #+#             */
+/*   Updated: 2024/03/11 12:47:33 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/kfs.h"
 
-uint16 keyboard_handler( void ) {
-
-    uint8 scancode;
-
-    scancode = inb(KEYBOARD_PORT);
-    if (RELEASED(scancode)) {
-        
-        if (scancode == 0x01)
-            
-        return (0);
-    }
-    else {
-        outb(KEYBOARD_PORT, 0);
-        
-    }
+uint8 inb(uint16 port){
     
-    return (0);
+    uint8 ret;
+    asm volatile ( "inb %1, %0" : "=a"(ret) : "Nd"(port) );
+    return ret;
+}
+
+void outb(uint16 port, uint8 value){
+    
+    asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
 }

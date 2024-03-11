@@ -10,7 +10,7 @@ void clear_screen(void)
        each element takes 2 bytes */
     while (index < 80 * 25 * 2) {
         terminal_buffer[index] = ' ';
-        index += 2;
+        index += 1; //TODO modified from 2, was not working with the make kernel
     }
 }
 

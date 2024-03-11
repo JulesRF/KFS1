@@ -6,7 +6,10 @@ int	main(void)
 	vga_index = 0;
 
 	clear_screen();
-	print_string("Hello", L_MAGENTA);
+	clear_screen();
+	clear_screen();
+
+	print_string("Hello ", L_MAGENTA);
     print_string("World", L_CYAN);
     print_string("!", GREEN);
     vga_index = 80;

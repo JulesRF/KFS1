@@ -1,4 +1,4 @@
-#include "include/print.h"
+#include "include/kfs.h"
 
 unsigned short *terminal_buffer;
 unsigned int    vga_index;
@@ -18,9 +18,10 @@ void print_string(char* str, unsigned char color)
 {
     int index = 0;
     while (str[index]) {
+        ft_isnewl(str, index);
         terminal_buffer[vga_index] = (unsigned short)str[index] | (unsigned short)color << 8;
         index++;
-        vga_index++;
+        vga_index++;        
     }
 }
 
@@ -31,5 +32,14 @@ void print_char(char str, unsigned char color)
     terminal_buffer[vga_index] = str | (unsigned short)color << 8;
     index++;
     vga_index++;
-    
+}
+
+int ft_isnewl(const char *str, int i)
+{
+    if (str[i] == '\n')
+    {
+        vga_index = vga_index + 80 - i - 1;
+        return (1);
+    }
+    return (0);
 }

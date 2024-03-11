@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/11 12:58:34 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/11 18:01:22 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,13 @@ NASM = nasm
 
 RM = rm
 
+#  -Werror ne pas oublier le backslash
 CFLAGS = -fno-builtin \
 		 -fno-exceptions \
 		 -fno-stack-protector \
 		 -nostdlib \
 		 -nodefaultlibs \
 		 -Wall \
-		 -Werror \
 		 -Wextra \
 		 -g3 \
 		 -m32
@@ -42,7 +42,8 @@ CFILES = boot/source/kernel.c \
 		 boot/source/shell-ter.c \
 		 boot/source/keyboard.c \
 		 boot/source/lib.c \
-		 boot/source/io.c
+		 boot/source/io.c \
+		 boot/source/interrupts.c
 
 OBJ = $(CFILES:.c=.o)
 

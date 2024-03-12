@@ -4,7 +4,7 @@ unsigned short *terminal_buffer[2];
 unsigned int    vga_index[2];
 unsigned int	screen;
 
-void clear_screen()
+void	clear_screen()
 {
     int index = 0;
     /* there are 25 lines each of 80 columns;
@@ -16,7 +16,7 @@ void clear_screen()
     }
 }
 
-void print_string(char* str, unsigned char color)
+void	print_string(char* str, unsigned char color)
 {
     int index = 0;
     while (str[index])
@@ -29,7 +29,7 @@ void print_string(char* str, unsigned char color)
     }
 }
 
-void print_char(char str, unsigned char color)
+void	print_char(char str, unsigned char color)
 {
     int index = 0;
     
@@ -38,7 +38,7 @@ void print_char(char str, unsigned char color)
     vga_index[screen]++;
 }
 
-int ft_isnewl(const char *str, int i)
+int	ft_isnewl(const char *str, int i)
 {
     if (str[i] == '\n')
     {
@@ -46,6 +46,25 @@ int ft_isnewl(const char *str, int i)
         return (1);
     }
     return (0);
+}
+
+void	ft_putnbr_hex(int nbr)
+{
+	char	base[16] = "0123456789ABCDEF";
+	int		size = 16;
+
+	if (nbr < 0)
+	{
+		print_char('-', WHITE);
+		nbr = nbr * -1;
+	}
+	if (nbr <= size)
+		print_char(base[nbr % size], WHITE);
+	else
+	{
+		ft_putnbr_hex(nbr / size);
+		print_char(base[nbr % size], WHITE);
+	}
 }
 
 void    ft_printerr(char *str)

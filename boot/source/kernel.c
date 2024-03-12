@@ -2,32 +2,35 @@
 
 int	main(void)
 {
-	terminal_buffer[0] = (unsigned short*)VGA_ADDRESS;
-	vga_index[0] = 0;
+	screen = 0;
+	terminal_buffer[screen] = (unsigned short*)VGA_ADDRESS;
+	vga_index[screen] = 0;
 
-	clear_screen(0);
-	clear_screen(0);
-	clear_screen(0);
+	clear_screen();
+	clear_screen();
+	clear_screen();
 
-	print_string("Hello\n", L_MAGENTA, 0);
-    print_string("World", L_CYAN, 0);
-    print_string("!", GREEN, 0);
+	print_string("Hello\n", L_MAGENTA);
+    print_string("World", L_CYAN);
+    print_string("!", GREEN);
     // vga_index = 160;
-    print_char('4', RED, 0);
-    print_char('2', YELLOW, 0);
-    print_char('0' + ft_strlen("salut"), RED, 0);
-    print_string("\n", WHITE, 0);
+    print_char('4', RED);
+    print_char('2', YELLOW);
+	ft_putnbr_hex(42, WHITE);
+	ft_putnbr(42, WHITE);
+    print_char('0' + ft_strlen("salut"), RED);
+    print_string("\n", WHITE);
     // vga_index = 240;
 
     // shell_ter();
 
-    print_string("Installing interrupt service routines (ISRs).\n", WHITE, 0);
+    print_string("Installing interrupt service routines (ISRs).\n", WHITE);
     isr_install();
 
-    print_string("Enabling external interrupts.\n", WHITE, 0);
+    print_string("Enabling external interrupts.\n", WHITE);
     asm volatile("sti");
 
-    print_string("Initializing keyboard (IRQ1).\n", WHITE, 0);
+    print_string("Initializing keyboard (IRQ1).\n", WHITE);
     init_keyboard();
     return 0 ;
 }

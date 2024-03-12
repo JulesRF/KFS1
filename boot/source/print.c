@@ -21,7 +21,8 @@ void print_string(char* str, unsigned char color, int terminal_index)
     while (str[index])
     {
         ft_isnewl(str, index, terminal_index);
-        terminal_buffer[terminal_index][vga_index[terminal_index]] = (unsigned short)str[index] | (unsigned short)color << 8;
+		if (str[index] != '\n')
+	        terminal_buffer[terminal_index][vga_index[terminal_index]] = (unsigned short)str[index] | (unsigned short)color << 8;
         index++;
         vga_index[terminal_index]++;
     }

@@ -75,7 +75,7 @@ static void keyboard_callback(registers_t *regs) {
 
     (void)regs;
 
-    print_string("hello world \n", RED, 0);
+    print_string("hello world \n", RED);
     
     uint8 scancode = inb(0x60);
     if (scancode != 0)

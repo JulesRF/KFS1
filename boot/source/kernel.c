@@ -2,13 +2,14 @@
 
 int	main(void)
 {
-	screen = 0;
-	terminal_buffer[screen] = (unsigned short*)VGA_ADDRESS;
-	vga_index[screen] = 0;
+	screen = 1;
+	terminal_buffer[0] = (unsigned short*)VGA_ADDRESS;
+	vga_index[1] = 0;
+	vga_index[2] = 0;
 
-	clear_screen();
-	clear_screen();
-	clear_screen();
+	clear_screen(0);
+	clear_screen(0);
+	clear_screen(0);
 
 	print_string("Hello\n", L_MAGENTA);
     print_string("World", L_CYAN);
@@ -20,6 +21,8 @@ int	main(void)
 	ft_putnbr(42, WHITE);
     print_char('0' + ft_strlen("salut"), RED);
     print_string("\n", WHITE);
+	// ft_switch_screen();
+	// ft_switch_screen();
     // vga_index = 240;
 
     // shell_ter();

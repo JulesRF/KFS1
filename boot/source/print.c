@@ -1,10 +1,10 @@
 #include "include/kfs.h"
 
-unsigned short *terminal_buffer[2];
-unsigned int    vga_index[2];
+unsigned short *terminal_buffer[3];
+unsigned int    vga_index[3];
 unsigned int	screen;
 
-void	clear_screen()
+void	clear_screen(int screen)
 {
     int index = 0;
     /* there are 25 lines each of 80 columns;
@@ -16,6 +16,29 @@ void	clear_screen()
     }
 }
 
+void	ft_switch_screen()
+{
+	int index = 0;
+	int old_screen;
+
+	if (screen == 0)
+	{
+		screen = 1;
+		old_screen = 0;
+	}
+	else if (screen == 1)
+	{
+		screen = 0;
+		old_screen = 1;
+	}
+	clear_screen(0);
+	while (index < 80 * 25 * 2)
+	{
+		terminal_buffer[0][index] = terminal_buffer[old_screen][index];
+		index++;
+	}
+}
+
 void	print_string(char* str, unsigned char color)
 {
     int index = 0;
@@ -23,7 +46,10 @@ void	print_string(char* str, unsigned char color)
     {
         ft_isnewl(str, index);
 		if (str[index] != '\n')
+		{
 	        terminal_buffer[screen][vga_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
+			terminal_buffer[0][vga_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
+		}	
         index++;
         vga_index[screen]++;
     }
@@ -34,6 +60,8 @@ void	print_char(char str, unsigned char color)
     int index = 0;
     
     terminal_buffer[screen][vga_index[screen]] = str | (unsigned short)color << 8;
+	terminal_buffer[0][vga_index[screen]] = str | (unsigned short)color << 8;
+
     index++;
     vga_index[screen]++;
 }

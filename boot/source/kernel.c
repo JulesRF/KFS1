@@ -16,7 +16,8 @@ int	main(void)
     // vga_index = 160;
     print_char('4', RED);
     print_char('2', YELLOW);
-	ft_putnbr_hex(42);
+	ft_putnbr_hex(42, WHITE);
+	ft_putnbr(42, WHITE);
     print_char('0' + ft_strlen("salut"), RED);
     print_string("\n", WHITE);
     // vga_index = 240;

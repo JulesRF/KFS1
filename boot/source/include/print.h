@@ -28,7 +28,8 @@ void    clear_screen();
 void    print_string(char* str, unsigned char color);
 void    print_char(char str, unsigned char color);
 int     ft_isnewl(const char *str, int i);
-void	ft_putnbr_hex(int nbr);
+void	ft_putnbr_hex(int nbr, unsigned char color);
+void	ft_putnbr(int nbr, unsigned char color);
 void    ft_printerr(char *str);
 
 #endif

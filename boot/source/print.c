@@ -48,22 +48,38 @@ int	ft_isnewl(const char *str, int i)
     return (0);
 }
 
-void	ft_putnbr_hex(int nbr)
+void	ft_putnbr_hex(int nbr, unsigned char color)
 {
 	char	base[16] = "0123456789ABCDEF";
 	int		size = 16;
 
 	if (nbr < 0)
 	{
-		print_char('-', WHITE);
+		print_char('-', color);
 		nbr = nbr * -1;
 	}
 	if (nbr <= size)
-		print_char(base[nbr % size], WHITE);
+		print_char(base[nbr % size], color);
 	else
 	{
-		ft_putnbr_hex(nbr / size);
-		print_char(base[nbr % size], WHITE);
+		ft_putnbr_hex(nbr / size, color);
+		print_char(base[nbr % size], color);
+	}
+}
+
+void	ft_putnbr(int nbr, unsigned char color)
+{
+	if (nbr < 0)
+	{
+		print_char('-', WHITE);
+		nbr = nbr * -1;
+	}
+	if (nbr <= 9)
+		print_char(nbr + '0', color);
+	else
+	{
+		ft_putnbr(nbr / 10, color);
+		print_char(nbr % 10 + '0', color);
 	}
 }
 

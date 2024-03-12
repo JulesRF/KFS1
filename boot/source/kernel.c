@@ -29,7 +29,7 @@ int	main(void)
 
     print_string("Initializing keyboard (IRQ1).\n", WHITE, 0);
     init_keyboard();
-    // return 0 ;
+    return 0 ;
 }
 
 

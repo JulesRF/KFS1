@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/11 18:01:22 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/12 13:32:15 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,13 @@ NASM = nasm
 
 RM = rm
 
-#  -Werror ne pas oublier le backslash
 CFLAGS = -fno-builtin \
 		 -fno-exceptions \
 		 -fno-stack-protector \
 		 -nostdlib \
 		 -nodefaultlibs \
 		 -Wall \
+		 -Werror \
 		 -Wextra \
 		 -g3 \
 		 -m32

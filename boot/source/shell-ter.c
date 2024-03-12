@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:33:55 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:59:08 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:49:44 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,5 @@ void shell_ter( void ) {
 
     while(69) {
 
-        // isr_install();
-        init_keyboard();
     }
 }

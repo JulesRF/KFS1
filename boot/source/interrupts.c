@@ -6,32 +6,16 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:11:13 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/12 13:24:08 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:44:01 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/kfs.h"
 #include "include/interrupts.h"
 
-#define LOW_16(address) (uint16)((address) & 0xFFFF)
-#define HIGH_16(address) (uint16)(((address) >> 16) & 0xFFFF)
-
-
-
 idt_gate_t	idt[256];
 idt_register_t idt_reg;
 isr_t interrupt_handlers[256];
-
-void	set_idt_gate(int n, uint32 handler) {
-
-	idt[n].low_offset = LOW_16(handler);
-	idt[n].selector = 0x08; // see GDT
-	idt[n].always0 = 0;
-	// 0x8E = 1  00 0 1  110
-	//        P DPL 0 D Type
-	idt[n].flags = 0x8E;
-	idt[n].high_offset = HIGH_16(handler);
-}
 
 char *exception_messages[] = {
 
@@ -81,6 +65,72 @@ void register_interrupt_handler(uint8 n, isr_t handler) {
     
     interrupt_handlers[n] = handler;
 }
+
+#define LOW_16(address) (uint16)((address) & 0xFFFF)
+#define HIGH_16(address) (uint16)(((address) >> 16) & 0xFFFF)
+
+
+void	set_idt_gate(int n, uint32 handler) {
+
+	idt[n].low_offset = LOW_16(handler);
+	idt[n].high_offset = HIGH_16(handler);
+
+	idt[n].selector = 0x08; // see GDT
+	idt[n].always0 = 0;
+	// 0x8E = 1  00 0 1  110
+	//        P DPL 0 D Type
+	idt[n].flags = 0x8E;
+}
+
+void isr0(void){}
+void isr1(void){}
+void isr2(void){}
+void isr3(void){}
+void isr4(void){}
+void isr5(void){}
+void isr6(void){}
+void isr7(void){}
+void isr8(void){}
+void isr9(void){}
+void isr10(void){}
+void isr11(void){}
+void isr12(void){}
+void isr13(void){}
+void isr14(void){}
+void isr15(void){}
+void isr16(void){}
+void isr17(void){}
+void isr18(void){}
+void isr19(void){}
+void isr20(void){}
+void isr21(void){}
+void isr22(void){}
+void isr23(void){}
+void isr24(void){}
+void isr25(void){}
+void isr26(void){}
+void isr27(void){}
+void isr28(void){}
+void isr29(void){}
+void isr30(void){}
+void isr31(void){}
+
+void irq0(void){}
+void irq1(void){}
+void irq2(void){}
+void irq3(void){}
+void irq4(void){}
+void irq5(void){}
+void irq6(void){}
+void irq7(void){}
+void irq8(void){}
+void irq9(void){}
+void irq10(void){}
+void irq11(void){}
+void irq12(void){}
+void irq13(void){}
+void irq14(void){}
+void irq15(void){}
 
 void	isr_install( void ) {
 

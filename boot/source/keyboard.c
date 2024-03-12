@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:57:14 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/12 13:14:48 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:35:45 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,12 @@ void print_letter(uint8 scancode) {
 }
 
 static void keyboard_callback(registers_t *regs) {
+
+    (void)regs;
+    
     uint8 scancode = inb(0x60);
-    print_string(scancode + "\n", WHITE, 0);
+    if (scancode != 0)
+        print_string(scancode + "\n", WHITE, 0);
 }
 
 void init_keyboard() {

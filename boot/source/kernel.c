@@ -16,11 +16,20 @@ int	main(void)
     print_char('4', RED, 0);
     print_char('2', YELLOW, 0);
     print_char('0' + ft_strlen("salut"), RED, 0);
-    ft_printerr("\nError\nSegfault", 0);
+    print_string("\n", WHITE, 0);
     // vga_index = 240;
 
-    shell_ter();
-    return 0 ;
+    // shell_ter();
+
+    print_string("Installing interrupt service routines (ISRs).\n", WHITE, 0);
+    isr_install();
+
+    print_string("Enabling external interrupts.\n", WHITE, 0);
+    asm volatile("sti");
+
+    print_string("Initializing keyboard (IRQ1).\n", WHITE, 0);
+    init_keyboard();
+    // return 0 ;
 }
 
 

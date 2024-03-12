@@ -39,7 +39,7 @@ char *exception_messages[] = {
 
 void isr_handler(registers_t *r) {
 
-    print_string(exception_messages[r->int_no] + '\n', RED, 0);
+    print_string(exception_messages[r->int_no] + '\n', RED);
 }
 
 void load_idt( void ) {

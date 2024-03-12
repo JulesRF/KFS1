@@ -20,13 +20,14 @@
 # define YELLOW 14
 # define WHITE 15
 
-extern unsigned short  *terminal_buffer[2];
-extern unsigned int    vga_index[2];
+extern unsigned short	*terminal_buffer[2];
+extern unsigned int		vga_index[2];
+extern unsigned int		screen;
 
-void    clear_screen(int terminal_index);
-void    print_string(char* str, unsigned char color, int terminal_index);
-void    print_char(char str, unsigned char color, int terminal_index);
-int     ft_isnewl(const char *str, int i, int terminal_index);
-void    ft_printerr(char *str, int terminal_index);
+void    clear_screen();
+void    print_string(char* str, unsigned char color);
+void    print_char(char str, unsigned char color);
+int     ft_isnewl(const char *str, int i);
+void    ft_printerr(char *str);
 
 #endif

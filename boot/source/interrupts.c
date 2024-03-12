@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:11:13 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/12 14:05:02 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:32:40 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void isr_handler(registers_t *r) {
 }
 
 void load_idt( void ) {
+
     idt_reg.base = (uint32) &idt;
     idt_reg.limit = 256 * sizeof(idt_gate_t) - 1; //256 = sizeof idt
     asm volatile("lidt (%0)" : : "r" (&idt_reg));

@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/12 13:32:15 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/12 15:55:08 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,3 +106,6 @@ run:
 
 kernel:
 	qemu-system-i386 -kernel $(BIN)
+
+gdb:
+	qemu-system-i386 -s -S -kernel $(BIN)

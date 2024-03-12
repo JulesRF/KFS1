@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:57:14 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/12 14:04:34 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:54:35 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void print_letter(uint8 scancode) {
 static void keyboard_callback(registers_t *regs) {
 
     (void)regs;
+
+    print_string("hello world \n", RED, 0);
     
     uint8 scancode = inb(0x60);
     if (scancode != 0)

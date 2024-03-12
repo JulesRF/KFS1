@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:54:54 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:43:29 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:22:24 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ typedef struct {
 
 typedef void (*t_interrupt_handler_func_ptr)(registers_t);
 
-void    register_interrupt_handler( uint8 n, t_interrupt_handler_func_ptr handler);
+typedef void (*isr_t)(registers_t *);
+
+void    register_interrupt_handler( uint8 n, isr_t handler);
 
 extern void irq0(void);
 extern void irq1(void);

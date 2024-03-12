@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:57:14 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/11 18:01:42 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:14:48 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,28 @@
 void print_letter(uint8 scancode) {
     switch (scancode) {
         case 0x0:
-            print_string("ERROR", WHITE);
+            print_string("ERROR", WHITE, 0);
             break;
         case 0x1:
-            print_string("ESC", WHITE);
+            print_string("ESC", WHITE, 0);
             break;
         case 0x2:
-            print_string("1", WHITE);
+            print_string("1", WHITE, 0);
             break;
         case 0x3:
-            print_string("2", WHITE);
+            print_string("2", WHITE, 0);
             break;
         case 0x39:
-            print_string("Space", WHITE);
+            print_string("Space", WHITE, 0);
             break;
         default:
             if (scancode <= 0x7f) {
-                print_string("Unknown key down", WHITE);
+                print_string("Unknown key down", WHITE, 0);
             } else if (scancode <= 0x39 + 0x80) {
-                print_string("key up ", WHITE);
+                print_string("key up ", WHITE, 0);
                 print_letter(scancode - 0x80);
             } else {
-                print_string("Unknown key up", WHITE);
+                print_string("Unknown key up", WHITE, 0);
             }
             break;
     }
@@ -73,7 +73,7 @@ void print_letter(uint8 scancode) {
 
 static void keyboard_callback(registers_t *regs) {
     uint8 scancode = inb(0x60);
-    print_string(scancode + "\n", WHITE);
+    print_string(scancode + "\n", WHITE, 0);
 }
 
 void init_keyboard() {

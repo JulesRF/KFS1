@@ -6,16 +6,17 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:11:13 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:53:43 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:24:08 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/kfs.h"
+#include "include/interrupts.h"
 
 #define LOW_16(address) (uint16)((address) & 0xFFFF)
 #define HIGH_16(address) (uint16)(((address) >> 16) & 0xFFFF)
 
-typedef void (*isr_t)(registers_t *);
+
 
 idt_gate_t	idt[256];
 idt_register_t idt_reg;
@@ -54,7 +55,7 @@ char *exception_messages[] = {
 
 void isr_handler(registers_t *r) {
 
-    print_string(exception_messages[r->int_no] + '\n', RED);
+    print_string(exception_messages[r->int_no] + '\n', RED, 0);
 }
 
 void load_idt( void ) {
@@ -74,6 +75,11 @@ void irq_handler(registers_t *r) {
     if (r->int_no < 40) {
         port_byte_out(0xA0, 0x20); // secondary EOI
     }
+}
+
+void register_interrupt_handler(uint8 n, isr_t handler) {
+    
+    interrupt_handlers[n] = handler;
 }
 
 void	isr_install( void ) {

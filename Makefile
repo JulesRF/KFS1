@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/13 16:31:12 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/13 17:26:16 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,9 @@ CFLAGS = -fno-builtin \
 CFILES = boot/source/kernel.c \
 		 boot/source/print.c \
 		 boot/source/shell-ter.c \
-		 boot/source/lib.c
+		 boot/source/lib.c \
+		 boot/source/io.c \
+		 boot/source/keyboard.c
 
 OBJ = $(CFILES:.c=.o)
 

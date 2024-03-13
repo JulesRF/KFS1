@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kfs.h                                              :+:      :+:    :+:   */
+/*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 15:57:41 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/13 17:05:31 by rdel-agu         ###   ########.fr       */
+/*   Created: 2024/03/13 17:05:09 by rdel-agu          #+#    #+#             */
+/*   Updated: 2024/03/13 17:09:54 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KFS_H
-# define KFS_H
+#include "include/kfs.h"
 
-# include	"print.h"
-# include	"lib.h"
-# include	"shell-ter.h"
-# include   "io.h"
-# include   "keyboard.h"
+uint8 inb(uint16 port){
+    uint8 ret;
+    asm volatile ( "inb %1, %0" : "=a"(ret) : "Nd"(port) );
+    return ret;
+}
 
-# define	NULL 0
-
-#endif
+void outb(uint16 port, uint8 value){
+    asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
+}

@@ -26,7 +26,7 @@ int	main(void)
     // vga_index = 240;
 
     shell_ter();
-    return 0 ;
+    // return 0 ;
 }
 
 

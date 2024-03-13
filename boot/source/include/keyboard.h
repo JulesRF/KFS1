@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kfs.h                                              :+:      :+:    :+:   */
+/*   keyboard.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 15:57:41 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/13 17:05:31 by rdel-agu         ###   ########.fr       */
+/*   Created: 2024/03/13 17:04:10 by rdel-agu          #+#    #+#             */
+/*   Updated: 2024/03/13 18:23:47 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KFS_H
-# define KFS_H
+#ifndef KEYBOARD_H
+# define KEYBOARD_H
 
-# include	"print.h"
-# include	"lib.h"
-# include	"shell-ter.h"
-# include   "io.h"
-# include   "keyboard.h"
+# include "kfs.h"
 
-# define	NULL 0
+void    keyboard_init();
 
 #endif

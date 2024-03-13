@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/13 19:07:33 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/13 19:16:07 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,21 @@ uint8 keyboard_read_input(){
     while(!(inb(0x64) & 1));
     return inb(0x60);
 }
+
+char* scan_code_strings[] = { //TODO rentre le code plus élégent
+    "ERROR",   // 0x00
+    "ESC",     // 0x01
+    "1",       // 0x02
+    "2",       // 0x03
+    "3",       // 0x04
+    "4",       // 0x05
+    "5",       // 0x06
+    "6",       // 0x07
+    "7",       // 0x08
+    "8",       // 0x09
+    "9",       // 0x0A
+    "0"        // 0x0B
+};
 
 void    print_letters(uint8 scancode) {
     

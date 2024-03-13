@@ -25,16 +25,7 @@ int	main(void)
 	// ft_switch_screen();
     // vga_index = 240;
 
-    // shell_ter();
-
-    print_string("Installing interrupt service routines (ISRs).\n", WHITE);
-    isr_install();
-
-    print_string("Enabling external interrupts.\n", WHITE);
-    asm volatile("sti");
-
-    print_string("Initializing keyboard (IRQ1).\n", WHITE);
-    init_keyboard();
+    shell_ter();
     return 0 ;
 }
 

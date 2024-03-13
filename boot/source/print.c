@@ -4,37 +4,32 @@ unsigned short *terminal_buffer[3];
 unsigned int    vga_index[3];
 unsigned int	screen;
 
-void	clear_screen(int screen)
+void	clear_screen(int this_screen)
 {
     int index = 0;
     /* there are 25 lines each of 80 columns;
        each element takes 2 bytes */
     while (index < 80 * 25 * 2)
     {
-        terminal_buffer[screen][index] = ' ';
-        index += 1; //TODO modified from 2, was not working with the make kernel
+        terminal_buffer[this_screen][index] = ' ';
+        index++; //TODO modified from 2, was not working with the make kernel
     }
 }
 
 void	ft_switch_screen()
 {
-	int index = 0;
-	int old_screen;
+	unsigned int index = 0;
+	// int old_screen;
 
-	if (screen == 0)
-	{
-		screen = 1;
-		old_screen = 0;
-	}
-	else if (screen == 1)
-	{
-		screen = 0;
-		old_screen = 1;
-	}
 	clear_screen(0);
+	if (screen == 1)
+		screen = 2;
+	else if (screen == 2)
+		screen = 1;
 	while (index < 80 * 25 * 2)
 	{
-		terminal_buffer[0][index] = terminal_buffer[old_screen][index];
+		// if (terminal_buffer[screen][index] >= 32 && terminal_buffer[screen][index] <= 126)
+		terminal_buffer[0][index] = terminal_buffer[screen][index];
 		index++;
 	}
 }
@@ -48,7 +43,7 @@ void	print_string(char* str, unsigned char color)
 		if (str[index] != '\n')
 		{
 	        terminal_buffer[screen][vga_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
-			terminal_buffer[0][vga_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
+			terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
 		}	
         index++;
         vga_index[screen]++;
@@ -60,7 +55,7 @@ void	print_char(char str, unsigned char color)
     int index = 0;
     
     terminal_buffer[screen][vga_index[screen]] = str | (unsigned short)color << 8;
-	terminal_buffer[0][vga_index[screen]] = str | (unsigned short)color << 8;
+	terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
 
     index++;
     vga_index[screen]++;

@@ -40,13 +40,15 @@ void	print_string(char* str, unsigned char color)
     while (str[index])
     {
         ft_isnewl(str, index);
-		if (str[index] != '\n')
+		if (str[index] == 8)
+			ft_backspace();
+		else if (str[index] != '\n')
 		{
 	        terminal_buffer[screen][vga_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
 			terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
-		}	
+		}
+		vga_index[screen]++;
         index++;
-        vga_index[screen]++;
     }
 }
 
@@ -59,6 +61,13 @@ void	print_char(char str, unsigned char color)
 
     index++;
     vga_index[screen]++;
+}
+
+void	ft_backspace()
+{
+	vga_index[screen]--;
+	terminal_buffer[screen][vga_index[screen]] = ' ';
+	terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
 }
 
 int	ft_isnewl(const char *str, int i)

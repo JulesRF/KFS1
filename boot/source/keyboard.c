@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/14 17:20:00 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/14 17:49:14 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,24 +259,47 @@ void    print_letters(uint8 scancode) {
     //         break;
     // }
 
-    char* scancode_strings[] = { //TODO rentre le code plus élégent
-    "ERROR",   // 0x00
-    "ESC", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "BACKSPACE", 
-    "TAB",      "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\n",
-    "L_CTRL",     "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "`",
-    "L_SHFT", "\\", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "R_SHFT", "*",
-            "L_ALT", " ", "CAPS_LOCK"
+    char* scancode_strings[] = {
+
+        "ERROR",
+        "ESC", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", ""/*BACKSPACE*/,
+        "TAB",      "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\n",
+        "L_CTRL",     "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "`",
+        ""/*L_SHFT*/, "\\", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", ""/*R_SHFT*/, "*"/*NUMPAD STAR*/,
+                "L_ALT", " "/*SPACE*/, "CAPS_LOCK"
+
+    };
+    
+    char* scancode_shift[] = {
+
+        "ERROR",
+        "ESC", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", ""/*BACKSPACE*/,
+        "TAB",      "Q", "W", "É", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "\n",
+        ""/*L_CTRL*/,     "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"", "~",
+        ""/*L_SHFT*/, "|", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", ""/*R_SHFT*/, "*"/*NUMPAD STAR*/,
+                "L_ALT", " "/*SPACE*/, "CAPS_LOCK", 
+        
     };
 
      // Check if scancode is within valid range
     if (scancode <= 0x3A) {
-        print_string(scancode_strings[scancode], temp_color);
+
+        if ((scancode == 0x2A) || scancode == 0x36 )
+            isShiftPressed = 1;
+        if (scancode == 0x0E)
+            ft_backspace();
+    
+        if (isShiftPressed == 0)
+            print_string(scancode_strings[scancode], temp_color);
+        else
+            print_string(scancode_shift[scancode], temp_color);
     } else if (scancode <= 0x39 + 0x80){
+        
         if ((scancode - 0x80 == 0x2A) || (scancode - 0x80 == 0x36))
             isShiftPressed = 0;
     } else {
-        
         print_string("Unknown key\n", temp_color);
+        ft_putnbr_hex(scancode - 0x80, RED);
     }
 }
 

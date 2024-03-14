@@ -82,9 +82,7 @@ void    print_letters(uint8 scancode) {
             print_string("=", temp_color);
             break;
         case 0x0E:
-            vga_index[screen]--;
-            terminal_buffer[screen] --;
-            print_string(" ", temp_color); //TODO backspace
+            ft_backspace(8, temp_color);
             break;
         //second row
         case 0x0F:
@@ -127,7 +125,7 @@ void    print_letters(uint8 scancode) {
             print_string("]", temp_color);
             break;
         case 0x1C:
-            print_string("enter", temp_color); //TODO enter key
+            print_string("\n", temp_color); //TODO enter key
             break;
         case 0x1D:
             print_string("left control", temp_color); //TODO control

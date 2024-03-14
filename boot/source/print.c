@@ -65,9 +65,12 @@ void	print_char(char str, unsigned char color)
 
 void	ft_backspace()
 {
-	vga_index[screen]--;
-	terminal_buffer[screen][vga_index[screen]] = ' ';
-	terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
+	if (vga_index[screen] % 80 != 0)
+	{
+		vga_index[screen]--;
+		terminal_buffer[screen][vga_index[screen]] = ' ';
+		terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
+	}
 }
 
 int	ft_isnewl(const char *str, int i)

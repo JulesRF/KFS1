@@ -14,6 +14,7 @@ void	clear_screen(int this_screen)
         terminal_buffer[this_screen][index] = ' ';
         index++; //TODO modified from 2, was not working with the make kernel
     }
+	// vga_index[0] = 0;
 }
 
 void	ft_switch_screen()
@@ -32,6 +33,7 @@ void	ft_switch_screen()
 		terminal_buffer[0][index] = terminal_buffer[screen][index];
 		index++;
 	}
+	vga_index[0] = vga_index[screen];
 }
 
 void	print_string(char* str, unsigned char color)
@@ -45,9 +47,10 @@ void	print_string(char* str, unsigned char color)
 		else if (str[index] != '\n')
 		{
 	        terminal_buffer[screen][vga_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
-			terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
+			terminal_buffer[0][vga_index[0]] = terminal_buffer[screen][vga_index[screen]];
 		}
 		vga_index[screen]++;
+		vga_index[0]++;
         index++;
     }
 }

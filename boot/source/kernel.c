@@ -13,6 +13,8 @@ int	main(void)
 	clear_screen(2);
 
 	print_string("Hello\n", L_MAGENTA);
+	// clear_screen(0);
+	// print_string("salut", WHITE);
     print_string("World", L_CYAN);
     print_string("!", GREEN);
 	ft_switch_screen();
@@ -22,9 +24,9 @@ int	main(void)
 	ft_putnbr(42, WHITE);
     print_char('0' + ft_strlen("salut"), RED);
     print_string("\n", WHITE);
+	ft_switch_screen();
 
-	// ft_switch_screen();
-	// print_string("Oh que oui", WHITE);
+	print_string("Oh que oui", WHITE);
 
     shell_ter();
     // return 0 ;

@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/13 19:16:07 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:40:28 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ char* scan_code_strings[] = { //TODO rentre le code plus élégent
     "9",       // 0x0A
     "0"        // 0x0B
 };
+int     isShiftPressed = 0;
 
 void    print_letters(uint8 scancode) {
     
-    int temp_color = WHITE;
+    int     temp_color = WHITE;
     
     switch (scancode) {
         //first row
@@ -46,40 +47,76 @@ void    print_letters(uint8 scancode) {
             print_string("ESC", temp_color);
             break;
         case 0x02:
-            print_string("1", temp_color);
+            if (isShiftPressed == 0)
+                print_string("1", temp_color);
+            else
+                print_string("!", temp_color);
             break;
         case 0x03:
-            print_string("2", temp_color);
+            if (isShiftPressed == 0)
+                print_string("2", temp_color);
+            else
+                print_string("@", temp_color);
             break;
         case 0x04:
-            print_string("3", temp_color);
+            if (isShiftPressed == 0)
+                print_string("3", temp_color);
+            else
+                print_string("#", temp_color);
             break;
         case 0x05:
-            print_string("4", temp_color);
+            if (isShiftPressed == 0)
+                print_string("4", temp_color);
+            else
+                print_string("$", temp_color);
             break;
         case 0x06:
-            print_string("5", temp_color);
+            if (isShiftPressed == 0)
+                print_string("5", temp_color);
+            else
+                print_string("%", temp_color);
             break;
         case 0x07:
-            print_string("6", temp_color);
+            if (isShiftPressed == 0)
+                print_string("6", temp_color);
+            else
+                print_string("^", temp_color);
             break;
         case 0x08:
-            print_string("7", temp_color);
+            if (isShiftPressed == 0)
+                print_string("7", temp_color);
+            else
+                print_string("&", temp_color);
             break;
         case 0x09:
-            print_string("8", temp_color);
+            if (isShiftPressed == 0)
+                print_string("8", temp_color);
+            else
+                print_string("*", temp_color);
             break;
         case 0x0A:
-            print_string("9", temp_color);
+            if (isShiftPressed == 0)
+                print_string("9", temp_color);
+            else
+                print_string("(", temp_color);
             break;
         case 0x0B:
-            print_string("0", temp_color);
+            if (isShiftPressed == 0)
+                print_string("0", temp_color);
+            else
+                print_string(")", temp_color);
             break;
         case 0x0C:
-            print_string("-", temp_color);
+            if (isShiftPressed == 0)
+                print_string("-", temp_color);
+            else
+                print_string("_", temp_color);
             break;
         case 0x0D:
-            print_string("=", temp_color);
+            if (isShiftPressed == 0)
+                print_string("=", temp_color);
+            else
+                print_string("+", temp_color);
             break;
         case 0x0E:
             vga_index[screen]--;
@@ -171,7 +208,8 @@ void    print_letters(uint8 scancode) {
             break;
         //fourth row
         case 0x2A:
-            print_string("left shift", temp_color); //TODO using left shift for uppercase
+            // print_string("left shift", temp_color); //TODO using left shift for uppercase
+            isShiftPressed = 1;
             break;
         case 0x2B:
             print_string("\\", temp_color);
@@ -207,7 +245,8 @@ void    print_letters(uint8 scancode) {
             print_string("/", temp_color);
             break;
         case 0x36:
-            print_string("right shift", temp_color); //TODO using right shift for uppercase
+            // print_string("right shift", temp_color); //TODO using right shift for uppercase
+            isShiftPressed = 1;
             break;
         case 0x37:
             // print_string(",", temp_color); //TODO numpad *
@@ -225,6 +264,13 @@ void    print_letters(uint8 scancode) {
         default:
             if (scancode <= 0x7f)
                 ft_printerr("*");
+            else if (scancode <= 0x39 + 0x80) {
+                // print_string("key up", temp_color);
+                // print_letters(scancode - 0x80);
+                // ft_putnbr_hex(scancode - 0x80, WHITE);
+                if ((scancode - 0x80 == 0x2A) || (scancode - 0x80 == 0x36))
+                    isShiftPressed = 0;
+            }
             break;
     }
 }

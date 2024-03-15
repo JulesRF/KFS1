@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/14 18:14:43 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:40:24 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,12 @@ void    print_letters(uint8 scancode) {
             isShiftPressed = 1;
         if (scancode == 0x0E)
             ft_backspace();
-    
         if (isShiftPressed == 0)
             print_string(scancode_strings[scancode], temp_color);
         else
             print_string(scancode_shift[scancode], temp_color);
+        if (scancode == 0x1C)
+            print_string("kfs-1 > ", L_BLUE);
     } else if (scancode <= 0x39 + 0x80){
         
         if ((scancode - 0x80 == 0x2A) || (scancode - 0x80 == 0x36))

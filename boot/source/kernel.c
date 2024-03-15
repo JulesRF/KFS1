@@ -12,21 +12,21 @@ int	main(void)
 	clear_screen(1);
 	clear_screen(2);
 
-	print_string("Hello\n", L_MAGENTA);
+	// print_string("Hello\n", L_MAGENTA);
 	// clear_screen(0);
 	// print_string("salut", WHITE);
-    print_string("World", L_CYAN);
-    print_string("!", GREEN);
-	ft_switch_screen();
-	print_char('4', RED);
-    print_char('2', YELLOW);
-	ft_putnbr_hex(42, WHITE);
-	ft_putnbr(42, WHITE);
-    print_char('0' + ft_strlen("salut"), RED);
-    print_string("\n", WHITE);
-	ft_switch_screen();
+    // print_string("World", L_CYAN);
+    // print_string("!", GREEN);
+	// ft_switch_screen();
+	// print_char('4', RED);
+    // print_char('2', YELLOW);
+	// ft_putnbr_hex(42, WHITE);
+	// ft_putnbr(42, WHITE);
+    // print_char('0' + ft_strlen("salut"), RED);
+    // print_string("\n", WHITE);
+	// ft_switch_screen();
 
-	print_string("Oh que oui", WHITE);
+	// print_string("Oh que oui", WHITE);
 
     shell_ter();
     // return 0 ;

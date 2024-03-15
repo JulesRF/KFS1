@@ -47,10 +47,10 @@ void	print_string(char* str, unsigned char color)
 		else if (str[index] != '\n')
 		{
 	        terminal_buffer[screen][vga_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
-			terminal_buffer[0][vga_index[0]] = terminal_buffer[screen][vga_index[screen]];
+			terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
 		}
 		vga_index[screen]++;
-		vga_index[0]++;
+		// vga_index[0]++;
         index++;
     }
 }

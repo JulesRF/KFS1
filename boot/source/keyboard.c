@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/19 12:21:44 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:25:01 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,13 @@ void    print_letters(uint8 scancode) {
         if (scancode == 0x1C)
             print_string("kfs-1 > ", L_BLUE);
     } else if (scancode >= 0x3B && scancode <=0x44 ) {  //F1-F10 PRESS
+        
+        if (scancode == 0x3B) { // F1
+           
+        }
+        if (scancode == 0x3C) { // F2
 
-    
+        }
     } else if(scancode <= 0x39 + 0x80) {                //KEY RELEASE
         
         if ((scancode - 0x80 == 0x2A) || (scancode - 0x80 == 0x36)) // SHIFT RELEASE
@@ -96,7 +101,7 @@ void    print_letters(uint8 scancode) {
             isCtrlPressed = 0;
     } else {                                            //scancode debug
         // print_string("Unknown key\n", temp_color);
-        ft_putnbr_hex(scancode, RED);
+        // ft_putnbr_hex(scancode, RED);
     }
 }
 

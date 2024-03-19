@@ -6,12 +6,14 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:33:55 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/15 15:46:09 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:04:08 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/kfs.h"
 #include "include/io.h"
+
+//cursor component
 
 uint16 get_cursor_position(void)
 {
@@ -31,6 +33,9 @@ void    modify_cursor_position( uint16 pos ){
     outb(0x3D5, (uint8) ((pos >> 8) & 0xFF));
 }
 
+//
+
+
 void shell_ter( void ) {
 
     int color42 = BROWN;
@@ -39,16 +44,20 @@ void shell_ter( void ) {
     print_string("/* ************************************************************************** */", color42);
     print_string("/*                                                                            */", color42);
     print_string("/*                                                        :::      ::::::::   */", color42);
-    print_string("/*   Welcome to KFS-1 !                                 :+:      :+:    :+:   */", color42);
+    print_string("/*   Welcome to KFS-1!                                  :+:      :+:    :+:   */", color42);
     print_string("/*                                                    +:+ +:+         +:+     */", color42);
-    print_string("/*   By: jroux-fo & rdel-agu                        +#+  +:+       +#+        */", color42);
+    print_string("/*   By: jroux-fo && rdel-agu                       +#+  +:+       +#+        */", color42);
     print_string("/*                                                +#+#+#+#+#+   +#+           */", color42);
-    print_string("/*   CPU MODEL :                                        #+#    #+#             */", color42);
-    print_string("/*   Updated: 2024/03/15 14:44:45 by rdel-agu         ###   ###########       */", color42);
+    print_string("/*                                                     #+#    #+#             */", color42);
+    print_string("/*   You silly goose!                                 ###   ###########       */", color42);
     print_string("/*                                                                            */", color42);
     print_string("/* ************************************************************************** */\n", color42);
 
     print_string("kfs-1 > ", L_BLUE);
+
+    
+        uint16 tmp_pos = vga_index[1];              //TODO imprimer un espace toujours devant le dernier char
+        modify_cursor_position(tmp_pos - 1); 
     
     while(69) {
         
@@ -64,8 +73,8 @@ void shell_ter( void ) {
 
         
         keyboard_init();
-        uint16 pos = vga_index[screen - 1]; //TODO imprimer un espace toujours devant le dernier char
-        modify_cursor_position(pos);        // pour pouvoir afficher le curseur devant
+        uint16 pos = vga_index[1];              //TODO imprimer un espace toujours devant le dernier char
+        modify_cursor_position(pos - 1);        // pour pouvoir afficher le curseur devant
        
 
     }

@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/19 12:17:04 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:21:44 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void    print_letters(uint8 scancode) {
         
     };
 
-
     // Check if scancode is within valid range
     if (scancode <= 0x3A) {
 
@@ -93,7 +92,7 @@ void    print_letters(uint8 scancode) {
         
         if ((scancode - 0x80 == 0x2A) || (scancode - 0x80 == 0x36)) // SHIFT RELEASE
             isShiftPressed = 0;
-        if (scancode - 0x80 == 0x1D)
+        if (scancode - 0x80 == 0x1D)                    // CTRL RELEASE
             isCtrlPressed = 0;
     } else {                                            //scancode debug
         // print_string("Unknown key\n", temp_color);

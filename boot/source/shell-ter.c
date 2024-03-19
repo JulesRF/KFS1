@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:33:55 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/19 12:04:08 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:17:13 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ void    modify_cursor_position( uint16 pos ){
 
 //
 
-
 void shell_ter( void ) {
 
     int color42 = BROWN;
 
-    print_string("\n", color42);
     print_string("/* ************************************************************************** */", color42);
     print_string("/*                                                                            */", color42);
     print_string("/*                                                        :::      ::::::::   */", color42);
@@ -75,7 +73,5 @@ void shell_ter( void ) {
         keyboard_init();
         uint16 pos = vga_index[1];              //TODO imprimer un espace toujours devant le dernier char
         modify_cursor_position(pos - 1);        // pour pouvoir afficher le curseur devant
-       
-
     }
 }

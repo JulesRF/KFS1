@@ -33,5 +33,6 @@ int     ft_isnewl(const char *str, int i);
 void	ft_putnbr_hex(int nbr, unsigned char color);
 void	ft_putnbr(int nbr, unsigned char color);
 void    ft_printerr(char *str);
+void	ft_ctrl_backspace();
 
 #endif

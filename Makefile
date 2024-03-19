@@ -6,7 +6,7 @@
 #    By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 14:00:09 by rdel-agu          #+#    #+#              #
-#    Updated: 2024/03/19 10:39:49 by rdel-agu         ###   ########.fr        #
+#    Updated: 2024/03/19 14:08:40 by rdel-agu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,27 +61,32 @@ LINKER = boot/linker.ld
 all: boot $(OBJ) link iso 
 
 boot : $(BOOT_OBJ)
-	@echo "\033[0;31mPhase boot\033[0m"
+	@echo " \033[0;31mPhase boot\033[30m"
 	$(NASM) -f elf32 $(BOOT) -o $(BOOT_OBJ)
+	@echo " \033[0;32mDone.\033[0m"
 
 %.o: %.c
-	@echo "\033[0;31mPhase C vers obj\033[0m"
+	@echo " \033[0;31mPhase C vers obj\033[30m"
 	$(CC) $(CFLAGS)  -c $< -o $@
+	@echo " \033[0;32mDone.\033[0m"
 
 %.o : %.asm
-	@echo "\033[0;31mPhase asm vers obj\033[0m"
+	@echo " \033[0;31mPhase asm vers obj\033[30m"
 	$(NASM) -f elf32 -g -F dwarf $< -o $@
+	@echo " \033[0;32mDone.\033[0m"
 
 link: $(BOOT_OBJ) $(OBJ)
-	@echo "\033[0;31mPhase link\033[0m"
+	@echo " \033[0;31mPhase link\033[30m"
 	$(LD) -m elf_i386 -T $(LINKER) -o $(BIN) $(BOOT_OBJ) $(OBJ)
+	@echo " \033[0;32mDone.\033[0m"
 
 iso:
-	@echo "\033[0;31mPhase iso\033[0m"
+	@echo " \033[0;31mPhase iso\033[30m"
 	mkdir -pv $(ISO_DIR)/boot/grub
 	cp $(BIN) $(ISO_DIR)/boot/$(BIN)
 	cp $(CFG) $(ISO_DIR)/boot/grub/grub.cfg
 	grub-mkrescue -o $(ISO) $(ISO_DIR)
+	@echo " \033[0;32mDone.\033[0m"
 
 clean:
 	@echo " \033[0;31mCleaning objects!\033[30m"

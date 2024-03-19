@@ -6,22 +6,21 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/19 13:25:01 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:47:21 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/kfs.h"
+
+int     isShiftPressed = 0;
+int     isCapsPressed  = 0;
+int     isCtrlPressed  = 0;
 
 uint8 keyboard_read_input(){
 
     while(!(inb(0x64) & 1));
     return inb(0x60);
 }
-
-
-int     isShiftPressed = 0;
-int     isCapsPressed  = 0;
-int     isCtrlPressed  = 0;
 
 void    print_letters(uint8 scancode) {
     
@@ -42,8 +41,7 @@ void    print_letters(uint8 scancode) {
         ""/*TAB*/,      "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\n",
         ""/*L_CTRL*/,     "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "`",
         ""/*L_SHFT*/, "\\", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", ""/*R_SHFT*/, "*"/*NUMPAD STAR*/,
-                "L_ALT", " "/*SPACE*/, "" /*CAPS_LOCK*/
-
+                ""/*L_ALT*/, " "/*SPACE*/, "" /*CAPS_LOCK*/
     };
     
     char* scancode_shift[] = {
@@ -53,8 +51,7 @@ void    print_letters(uint8 scancode) {
         ""/*TAB*/,      "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "\n",
         ""/*L_CTRL*/,     "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"", "~",
         ""/*L_SHFT*/, "|", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", ""/*R_SHFT*/, "*"/*NUMPAD STAR*/,
-                ""/*L_ALT*/, " "/*SPACE*/, "" /*CAPS_LOCK*/
-        
+                ""/*L_ALT*/, " "/*SPACE*/, "" /*CAPS_LOCK*/  
     };
 
     // Check if scancode is within valid range
@@ -69,6 +66,7 @@ void    print_letters(uint8 scancode) {
             ft_backspace();
         }
         if (scancode == 0x3A) {                         //CAPSLOCK PRESS
+
             if (isCapsPressed == 1)
                 isCapsPressed = 0;
             else
@@ -77,6 +75,8 @@ void    print_letters(uint8 scancode) {
         if (isCtrlPressed == 1) {
             if (scancode == 0x26)
                 clear_screen(0);                        //TODO faire revenir le clearscreen au début et afficher le kfs-1 >
+            if (scancode == 0x0E)
+                ft_ctrl_backspace();
         }
         else if (isShiftPressed == 1 || isCapsPressed == 1)   //SHIFT HANDLER
             print_string(scancode_shift[scancode], temp_color);
@@ -85,6 +85,7 @@ void    print_letters(uint8 scancode) {
 
         if (scancode == 0x1C)
             print_string("kfs-1 > ", L_BLUE);
+
     } else if (scancode >= 0x3B && scancode <=0x44 ) {  //F1-F10 PRESS
         
         if (scancode == 0x3B) { // F1
@@ -100,6 +101,7 @@ void    print_letters(uint8 scancode) {
         if (scancode - 0x80 == 0x1D)                    // CTRL RELEASE
             isCtrlPressed = 0;
     } else {                                            //scancode debug
+
         // print_string("Unknown key\n", temp_color);
         // ft_putnbr_hex(scancode, RED);
     }

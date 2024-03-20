@@ -41,5 +41,6 @@ void	ft_putnbr(int nbr, unsigned char color);
 void    ft_printerr(char *str);
 void	ft_ctrl_backspace();
 void    *ft_memset(void *b, int c, uint16 len);
+void	print_status( void );
 
 #endif

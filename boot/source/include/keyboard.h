@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:04:10 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/13 18:23:47 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:07:57 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,9 @@
 # include "kfs.h"
 
 void    keyboard_init();
+
+extern int     isShiftPressed;
+extern int     isCapsPressed;
+extern int     isCtrlPressed;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:33:55 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/19 14:17:13 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:16:41 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void shell_ter( void ) {
 
 		vga_buffer[terminal_index[screen] + 1] = (unsigned short)' ' | (unsigned short)WHITE << 8;
         uint16 tmp_pos = terminal_index[screen] + 1;              //TODO imprimer un espace toujours devant le dernier char
-        modify_cursor_position(tmp_pos - 1); 
+        modify_cursor_position(tmp_pos - 1);
+        print_status();
     
     while(69) {
         
@@ -78,5 +79,6 @@ void shell_ter( void ) {
 		vga_buffer[terminal_index[screen] + 1] = (unsigned short)' ' | (unsigned short)WHITE << 8;
         uint16 pos = terminal_index[screen] + 1;              //TODO imprimer un espace toujours devant le dernier char
         modify_cursor_position(pos - 1);        // pour pouvoir afficher le curseur devant
+        print_status();
     }
 }

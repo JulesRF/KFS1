@@ -37,25 +37,29 @@ void    modify_cursor_position( uint16 pos ){
 
 void shell_ter( void ) {
 
-    int color42 = BROWN;
+    // int color42 = BROWN;
 
-    print_string("/* ************************************************************************** */", color42);
-    print_string("/*                                                                            */", color42);
-    print_string("/*                                                        :::      ::::::::   */", color42);
-    print_string("/*   Welcome to KFS-1!                                  :+:      :+:    :+:   */", color42);
-    print_string("/*                                                    +:+ +:+         +:+     */", color42);
-    print_string("/*   By: jroux-fo && rdel-agu                       +#+  +:+       +#+        */", color42);
-    print_string("/*                                                +#+#+#+#+#+   +#+           */", color42);
-    print_string("/*                                                     #+#    #+#             */", color42);
-    print_string("/*   You silly goose!                                 ###   ###########       */", color42);
-    print_string("/*                                                                            */", color42);
-    print_string("/* ************************************************************************** */\n", color42);
+    // print_string("/* ************************************************************************** */", color42);
+    // print_string("/*                                                                            */", color42);
+    // print_string("/*                                                        :::      ::::::::   */", color42);
+    // print_string("/*   Welcome to KFS-1!                                  :+:      :+:    :+:   */", color42);
+    // print_string("/*                                                    +:+ +:+         +:+     */", color42);
+    // print_string("/*   By: jroux-fo && rdel-agu                       +#+  +:+       +#+        */", color42);
+    // print_string("/*                                                +#+#+#+#+#+   +#+           */", color42);
+    // print_string("/*                                                     #+#    #+#             */", color42);
+    // print_string("/*   You silly goose!                                 ###   ###########       */", color42);
+    // print_string("/*                                                                            */", color42);
+    // print_string("/* ************************************************************************** */\n", color42);
 
-    print_string("kfs-1 > ", L_BLUE);
+    // print_string("kfs-1 > ", L_BLUE);
+	ft_prompt();
+	screen = 1;
+	ft_prompt();
+	screen = 0;
 
     
-        uint16 tmp_pos = terminal_index[0];              //TODO imprimer un espace toujours devant le dernier char
-        modify_cursor_position(tmp_pos - 1); 
+        uint16 tmp_pos = terminal_index[screen];              //TODO imprimer un espace toujours devant le dernier char
+        modify_cursor_position(tmp_pos); 
     
     while(69) {
         
@@ -71,7 +75,7 @@ void shell_ter( void ) {
 
         
         keyboard_init();
-        uint16 pos = terminal_index[0];              //TODO imprimer un espace toujours devant le dernier char
-        modify_cursor_position(pos - 1);        // pour pouvoir afficher le curseur devant
+        uint16 pos = terminal_index[screen];              //TODO imprimer un espace toujours devant le dernier char
+        modify_cursor_position(pos);        // pour pouvoir afficher le curseur devant
     }
 }

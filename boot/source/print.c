@@ -44,35 +44,6 @@ void	ft_switch_screen()
 	vga_index = terminal_index[screen];
 }
 
-// void    ft_switch_screen()
-// {
-//     unsigned int index = 0;
-
-//     clear_screen(0);
-//     if (screen == 1) {
-
-//         screen = 2;
-//         while (index < 80 * 25 * 2)
-//         {
-//             vga_buffer[index] = terminal_buffer[2][index];
-//             index++;
-//         }
-//         terminal_index[0] = terminal_index[2];
-//     }
-//     else if (screen == 2) {
-
-//         screen = 1;
-//         while (index < 80 * 25 * 2)
-//         {
-//             tb0[index] = tb1[index];
-//             index++;
-//         }
-//         vgi0 = vgi1;
-//     }
-    
-//     terminal_buffer[0][0] = ((unsigned short)screen + 48) | (unsigned short)L_BLUE << 8;
-// }
-
 void	print_string(char* str, unsigned char color)
 {
     int index = 0;
@@ -139,6 +110,25 @@ int	ft_isnewl(const char *str, int i)
         return (1);
     }
     return (0);
+}
+
+void	ft_prompt()
+{
+	int color42 = BROWN;
+
+    print_string("/* ************************************************************************** */", color42);
+    print_string("/*                                                                            */", color42);
+    print_string("/*                                                        :::      ::::::::   */", color42);
+    print_string("/*   Welcome to KFS-1!                                  :+:      :+:    :+:   */", color42);
+    print_string("/*                                                    +:+ +:+         +:+     */", color42);
+    print_string("/*   By: jroux-fo && rdel-agu                       +#+  +:+       +#+        */", color42);
+    print_string("/*                                                +#+#+#+#+#+   +#+           */", color42);
+    print_string("/*                                                     #+#    #+#             */", color42);
+    print_string("/*   You silly goose!                                 ###   ###########       */", color42);
+    print_string("/*                                                                            */", color42);
+    print_string("/* ************************************************************************** */\n", color42);
+
+    print_string("kfs-1 > ", L_BLUE);
 }
 
 void	ft_putnbr_hex(int nbr, unsigned char color)

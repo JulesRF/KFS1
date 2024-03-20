@@ -77,6 +77,7 @@ void    print_letters(uint8 scancode) {
 			{
 				clear_screen(100);
                 clear_screen(screen);                        //TODO faire revenir le clearscreen au début et afficher le kfs-1 >
+				ft_prompt();
 			}
             if (scancode == 0x0E)
                 ft_ctrl_backspace();
@@ -93,6 +94,7 @@ void    print_letters(uint8 scancode) {
         
         if (scancode == 0x3B) { // F1
            ft_switch_screen();
+		//    ft_prompt();
         }
         if (scancode == 0x3C) { // F2
 

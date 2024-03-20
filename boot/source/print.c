@@ -84,24 +84,6 @@ void	ft_backspace()
 	}
 }
 
-int		last_word_finder( char *str, int current_index ) {
-
-	int i = current_index;
-	int j = 0;
-
-	while (str[i] != ' ') {
-
-		i--;
-		j++;
-	}
-	return j;
-}
-
-void	ft_ctrl_backspace() {
-
-	ft_putnbr(last_word_finder((char *)terminal_buffer[0], terminal_index[screen]), YELLOW);
-}
-
 int	ft_isnewl(const char *str, int i)
 {
     if (str[i] == '\n')

@@ -2,6 +2,7 @@
 # define PRINT_H
 
 # define VGA_ADDRESS 0xB8000
+# define VGA_SIZE 80 * 25
 
 # define BLACK 0
 # define BLUE 1
@@ -20,9 +21,13 @@
 # define YELLOW 14
 # define WHITE 15
 
-extern unsigned short	*terminal_buffer[3];
-extern unsigned int		vga_index[3];
-extern unsigned int		screen;
+# include "kfs.h"
+
+extern uint16	*vga_buffer;
+extern uint16	terminal_buffer[2][VGA_ADDRESS];
+extern uint32	terminal_index[2];
+extern uint32	vga_index;
+extern uint32	screen;
 
 void    clear_screen(int screen);
 void	ft_switch_screen();
@@ -34,5 +39,6 @@ void	ft_putnbr_hex(int nbr, unsigned char color);
 void	ft_putnbr(int nbr, unsigned char color);
 void    ft_printerr(char *str);
 void	ft_ctrl_backspace();
+void    *ft_memset(void *b, int c, uint16 len);
 
 #endif

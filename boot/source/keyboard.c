@@ -74,7 +74,10 @@ void    print_letters(uint8 scancode) {
         }
         if (isCtrlPressed == 1) {
             if (scancode == 0x26)
-                clear_screen(0);                        //TODO faire revenir le clearscreen au début et afficher le kfs-1 >
+			{
+				clear_screen(100);
+                clear_screen(screen);                        //TODO faire revenir le clearscreen au début et afficher le kfs-1 >
+			}
             if (scancode == 0x0E)
                 ft_ctrl_backspace();
         }
@@ -89,7 +92,7 @@ void    print_letters(uint8 scancode) {
     } else if (scancode >= 0x3B && scancode <=0x44 ) {  //F1-F10 PRESS
         
         if (scancode == 0x3B) { // F1
-           
+           ft_switch_screen();
         }
         if (scancode == 0x3C) { // F2
 

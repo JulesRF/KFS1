@@ -2,15 +2,13 @@
 
 int	main(void)
 {
-	screen = 1;
-	terminal_buffer[0] = (unsigned short*)VGA_ADDRESS;
-	vga_index[0] = 0;
-	vga_index[1] = 0;
-	vga_index[2] = 0;
+	screen = 0;
+	vga_buffer = (uint16 *)VGA_ADDRESS;
+	vga_index = 0;
 
+	clear_screen(100);
 	clear_screen(0);
 	clear_screen(1);
-	clear_screen(2);
 
 	// print_string("Hello\n", L_MAGENTA);
 	// clear_screen(0);

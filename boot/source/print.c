@@ -1,20 +1,28 @@
 #include "include/kfs.h"
 
-unsigned short *terminal_buffer[3];
-unsigned int    vga_index[3];
-unsigned int	screen;
+
+uint16	*vga_buffer;
+uint16	terminal_buffer[2][VGA_ADDRESS];
+uint32	terminal_index[2];
+uint32	vga_index;
+uint32	screen = 0;
+
+void	clear_screen2(int this_screen)
+{
+	ft_memset(terminal_buffer[this_screen], 0x00, 80 * 25);
+	terminal_index[this_screen] = 0;
+}
 
 void	clear_screen(int this_screen)
 {
-    int index = 0;
-    /* there are 25 lines each of 80 columns;
-       each element takes 2 bytes */
-    while (index < 80 * 25 * 2)
-    {
-        terminal_buffer[this_screen][index] = ' ';
-        index++; //TODO modified from 2, was not working with the make kernel
-    }
-	// vga_index[0] = 0;
+	if (this_screen == 100)
+	{
+		ft_memset(vga_buffer, 0x00, 80 * 25);
+		vga_index = 0;
+	}
+	else
+		clear_screen2(this_screen);
+
 }
 
 void	ft_switch_screen()
@@ -22,19 +30,48 @@ void	ft_switch_screen()
 	unsigned int index = 0;
 	// int old_screen;
 
-	clear_screen(0);
-	if (screen == 1)
-		screen = 2;
-	else if (screen == 2)
+	clear_screen(100);
+	if (screen == 0)
 		screen = 1;
-	while (index < 80 * 25)
+	else if (screen == 1)
+		screen = 0;
+	while (index < 80 * 25 * 2)
 	{
 		// if (terminal_buffer[screen][index] >= 32 && terminal_buffer[screen][index] <= 126)
-		terminal_buffer[0][index] = terminal_buffer[screen][index];
+		vga_buffer[index] = terminal_buffer[screen][index];
 		index++;
 	}
-	vga_index[0] = vga_index[screen];
+	vga_index = terminal_index[screen];
 }
+
+// void    ft_switch_screen()
+// {
+//     unsigned int index = 0;
+
+//     clear_screen(0);
+//     if (screen == 1) {
+
+//         screen = 2;
+//         while (index < 80 * 25 * 2)
+//         {
+//             vga_buffer[index] = terminal_buffer[2][index];
+//             index++;
+//         }
+//         terminal_index[0] = terminal_index[2];
+//     }
+//     else if (screen == 2) {
+
+//         screen = 1;
+//         while (index < 80 * 25 * 2)
+//         {
+//             tb0[index] = tb1[index];
+//             index++;
+//         }
+//         vgi0 = vgi1;
+//     }
+    
+//     terminal_buffer[0][0] = ((unsigned short)screen + 48) | (unsigned short)L_BLUE << 8;
+// }
 
 void	print_string(char* str, unsigned char color)
 {
@@ -46,11 +83,11 @@ void	print_string(char* str, unsigned char color)
 			ft_backspace();
 		else if (str[index] != '\n')
 		{
-	        terminal_buffer[screen][vga_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
-			terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
+	        terminal_buffer[screen][terminal_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
+			vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
 		}
-		vga_index[screen]++;
-		// vga_index[0]++;
+		terminal_index[screen]++;
+		// terminal_index[0]++;
         index++;
     }
 }
@@ -59,20 +96,20 @@ void	print_char(char str, unsigned char color)
 {
     int index = 0;
     
-    terminal_buffer[screen][vga_index[screen]] = str | (unsigned short)color << 8;
-	terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
+    terminal_buffer[screen][terminal_index[screen]] = str | (unsigned short)color << 8;
+	vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
 
     index++;
-    vga_index[screen]++;
+    terminal_index[screen]++;
 }
 
 void	ft_backspace()
 {
-	if (vga_index[screen] % 80 != 0)
+	if (terminal_index[screen] % 80 != 0)
 	{
-		vga_index[screen]--;
-		terminal_buffer[screen][vga_index[screen]] = ' ';
-		terminal_buffer[0][vga_index[screen]] = terminal_buffer[screen][vga_index[screen]];
+		terminal_index[screen]--;
+		terminal_buffer[screen][terminal_index[screen]] = ' ';
+		vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
 	}
 }
 
@@ -91,14 +128,14 @@ int		last_word_finder( char *str, int current_index ) {
 
 void	ft_ctrl_backspace() {
 
-	ft_putnbr(last_word_finder((char *)terminal_buffer[0], vga_index[screen]), YELLOW);
+	ft_putnbr(last_word_finder((char *)terminal_buffer[0], terminal_index[screen]), YELLOW);
 }
 
 int	ft_isnewl(const char *str, int i)
 {
     if (str[i] == '\n')
     {
-        vga_index[screen] = vga_index[screen] + 80 - (vga_index[screen] % 80) - 1;
+        terminal_index[screen] = terminal_index[screen] + 80 - (terminal_index[screen] % 80) - 1;
         return (1);
     }
     return (0);
@@ -142,4 +179,19 @@ void	ft_putnbr(int nbr, unsigned char color)
 void    ft_printerr(char *str)
 {
     print_string(str, RED);
+}
+
+void    *ft_memset(void *b, int c, uint16 len)
+{
+    uint16            i;
+    unsigned char    *dest;
+
+    i = 0;
+    dest = (unsigned char *)b;
+    while (i < len)
+    {
+        dest[i] = (unsigned char)c;
+        i++;
+    }
+    return (dest);
 }

@@ -13,10 +13,10 @@
 #ifndef KFS_H
 # define KFS_H
 
+# include   "io.h"
 # include	"print.h"
 # include	"lib.h"
 # include	"shell-ter.h"
-# include   "io.h"
 # include   "keyboard.h"
 
 # define	NULL 0

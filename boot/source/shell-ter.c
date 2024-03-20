@@ -54,7 +54,7 @@ void shell_ter( void ) {
     print_string("kfs-1 > ", L_BLUE);
 
     
-        uint16 tmp_pos = vga_index[1];              //TODO imprimer un espace toujours devant le dernier char
+        uint16 tmp_pos = terminal_index[0];              //TODO imprimer un espace toujours devant le dernier char
         modify_cursor_position(tmp_pos - 1); 
     
     while(69) {
@@ -71,7 +71,7 @@ void shell_ter( void ) {
 
         
         keyboard_init();
-        uint16 pos = vga_index[1];              //TODO imprimer un espace toujours devant le dernier char
+        uint16 pos = terminal_index[0];              //TODO imprimer un espace toujours devant le dernier char
         modify_cursor_position(pos - 1);        // pour pouvoir afficher le curseur devant
     }
 }

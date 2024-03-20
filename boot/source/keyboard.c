@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/20 13:50:40 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:08:53 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void    print_letters(uint8 scancode) {
         }
         if (isCtrlPressed == 1) {
             if (scancode == 0x26)
-                clear_screen(0);                                        //TODO avoir kfs-1 > apres un clearscreen
+			{
+				clear_screen(100);
+                clear_screen(screen);                        //TODO faire revenir le clearscreen au début et afficher le kfs-1 >
+			}
             if (scancode == 0x0E)
                 ft_ctrl_backspace();
         }

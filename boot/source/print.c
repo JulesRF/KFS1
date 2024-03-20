@@ -58,7 +58,6 @@ void	print_string(char* str, unsigned char color)
 			vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
 		}
 		terminal_index[screen]++;
-		// terminal_index[0]++;
         index++;
     }
 }
@@ -76,6 +75,7 @@ void	print_char(char str, unsigned char color)
 
 void	ft_backspace()
 {
+	if (ft_strcmp([terminal_index[screen] - 8], "kfs-1 > "))
 	if (terminal_index[screen] % 80 != 0)
 	{
 		terminal_index[screen]--;
@@ -166,4 +166,18 @@ void    *ft_memset(void *b, int c, uint16 len)
         i++;
     }
     return (dest);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, int n)
+{
+	int	i;
+
+	i = 0;
+	while (((unsigned char)s1[i] || (unsigned char)s2[i]) && i < n)
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
 }

@@ -36,22 +36,7 @@ void    modify_cursor_position( uint16 pos ){
 //
 
 void shell_ter( void ) {
-
-    // int color42 = BROWN;
-
-    // print_string("/* ************************************************************************** */", color42);
-    // print_string("/*                                                                            */", color42);
-    // print_string("/*                                                        :::      ::::::::   */", color42);
-    // print_string("/*   Welcome to KFS-1!                                  :+:      :+:    :+:   */", color42);
-    // print_string("/*                                                    +:+ +:+         +:+     */", color42);
-    // print_string("/*   By: jroux-fo && rdel-agu                       +#+  +:+       +#+        */", color42);
-    // print_string("/*                                                +#+#+#+#+#+   +#+           */", color42);
-    // print_string("/*                                                     #+#    #+#             */", color42);
-    // print_string("/*   You silly goose!                                 ###   ###########       */", color42);
-    // print_string("/*                                                                            */", color42);
-    // print_string("/* ************************************************************************** */\n", color42);
-
-    // print_string("kfs-1 > ", L_BLUE);
+	
 	ft_prompt();
 	screen = 1;
 	ft_prompt();

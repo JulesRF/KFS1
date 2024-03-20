@@ -8,9 +8,9 @@ int	main(void)
 	vga_index[1] = 0;
 	vga_index[2] = 0;
 
-	clear_screen(0);
-	clear_screen(1);
-	clear_screen(2);
+	// clear_screen(0);
+	// clear_screen(1);
+	// clear_screen(2);
 
 	// print_string("Hello\n", L_MAGENTA);
 	// clear_screen(0);
@@ -24,6 +24,8 @@ int	main(void)
 	// ft_putnbr(42, WHITE);
     // print_char('0' + ft_strlen("salut"), RED);
     // print_string("\n", WHITE);
+	// ft_switch_screen();
+	// ft_switch_screen();
 	// ft_switch_screen();
 
 	// print_string("Oh que oui", WHITE);

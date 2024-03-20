@@ -27,7 +27,7 @@ void	ft_switch_screen()
 		screen = 2;
 	else if (screen == 2)
 		screen = 1;
-	while (index < 80 * 25 * 2)
+	while (index < 80 * 25)
 	{
 		// if (terminal_buffer[screen][index] >= 32 && terminal_buffer[screen][index] <= 126)
 		terminal_buffer[0][index] = terminal_buffer[screen][index];

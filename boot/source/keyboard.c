@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/19 13:47:21 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:50:40 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ void    print_letters(uint8 scancode) {
     // Check if scancode is within valid range
     if (scancode <= 0x3A) {
 
-        if ((scancode == 0x2A) || scancode == 0x36 )    //SHIFT PRESS
+        if ((scancode == 0x2A) || scancode == 0x36 )                    //SHIFT PRESS
             isShiftPressed = 1;
-        if (scancode == 0x1D)                           //LEFT CONTROL PRESS
+        if (scancode == 0x1D)                                           //LEFT CONTROL PRESS
             isCtrlPressed = 1;
-        if (scancode == 0x0E) {                         //BACKSPACE PRESS
+        if (scancode == 0x0E) {                                         //BACKSPACE PRESS
             // TODO faire en sorte de ne pas pouvoir retirer le kfs-1 >
             ft_backspace();
         }
-        if (scancode == 0x3A) {                         //CAPSLOCK PRESS
+        if (scancode == 0x3A) {                                         //CAPSLOCK PRESS
 
             if (isCapsPressed == 1)
                 isCapsPressed = 0;
@@ -74,11 +74,11 @@ void    print_letters(uint8 scancode) {
         }
         if (isCtrlPressed == 1) {
             if (scancode == 0x26)
-                clear_screen(0);                        //TODO faire revenir le clearscreen au début et afficher le kfs-1 >
+                clear_screen(0);                                        //TODO avoir kfs-1 > apres un clearscreen
             if (scancode == 0x0E)
                 ft_ctrl_backspace();
         }
-        else if (isShiftPressed == 1 || isCapsPressed == 1)   //SHIFT HANDLER
+        else if (isShiftPressed == 1 || isCapsPressed == 1)             //SHIFT HANDLER
             print_string(scancode_shift[scancode], temp_color);
         else
             print_string(scancode_strings[scancode], temp_color);
@@ -86,21 +86,21 @@ void    print_letters(uint8 scancode) {
         if (scancode == 0x1C)
             print_string("kfs-1 > ", L_BLUE);
 
-    } else if (scancode >= 0x3B && scancode <=0x44 ) {  //F1-F10 PRESS
+    } else if (scancode >= 0x3B && scancode <=0x44 ) {                  //F1-F10 PRESS
         
         if (scancode == 0x3B) { // F1
-           
+           ft_switch_screen();
         }
         if (scancode == 0x3C) { // F2
 
         }
-    } else if(scancode <= 0x39 + 0x80) {                //KEY RELEASE
+    } else if(scancode <= 0x39 + 0x80) {                                //KEY RELEASE
         
-        if ((scancode - 0x80 == 0x2A) || (scancode - 0x80 == 0x36)) // SHIFT RELEASE
+        if ((scancode - 0x80 == 0x2A) || (scancode - 0x80 == 0x36))     // SHIFT RELEASE
             isShiftPressed = 0;
-        if (scancode - 0x80 == 0x1D)                    // CTRL RELEASE
+        if (scancode - 0x80 == 0x1D)                                    // CTRL RELEASE
             isCtrlPressed = 0;
-    } else {                                            //scancode debug
+    } else {                                                            //scancode debug
 
         // print_string("Unknown key\n", temp_color);
         // ft_putnbr_hex(scancode, RED);

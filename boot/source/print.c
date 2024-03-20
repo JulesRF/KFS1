@@ -42,6 +42,7 @@ void	ft_switch_screen()
 		index++;
 	}
 	vga_index = terminal_index[screen];
+	print_status();	
 }
 
 void	print_string(char* str, unsigned char color)
@@ -98,17 +99,12 @@ void	ft_prompt()
 {
 	int color42 = BROWN;
 
-    print_string("/* ************************************************************************** */", color42);
-    print_string("/*                                                                            */", color42);
-    print_string("/*                                                        :::      ::::::::   */", color42);
-    print_string("/*   Welcome to KFS-1!                                  :+:      :+:    :+:   */", color42);
-    print_string("/*                                                    +:+ +:+         +:+     */", color42);
-    print_string("/*   By: jroux-fo && rdel-agu                       +#+  +:+       +#+        */", color42);
-    print_string("/*                                                +#+#+#+#+#+   +#+           */", color42);
-    print_string("/*                                                     #+#    #+#             */", color42);
-    print_string("/*   You silly goose!                                 ###   ###########       */", color42);
-    print_string("/*                                                                            */", color42);
-    print_string("/* ************************************************************************** */\n", color42);
+    print_string("*--------------------*------------------------------------*--------------------*", color42);
+    print_string("|     dP88  oP\"Yb.   |    Welcome to KFS-1!               |    SCREEN          |", color42);
+    print_string("|    dP 88  \"\' dP\'   |                                    |    CAPS_LOCK       |", color42);
+    print_string("|   d888888   dP'    |    Made by jroux-fo && rdel-agu    |    SHIFT           |", color42);
+    print_string("|       88  .d8888   |                                    |    CTRL            |", color42);
+    print_string("*--------------------*------------------------------------*--------------------*\n", color42);
 
     print_string("kfs-1 > ", L_BLUE);
 }
@@ -180,4 +176,13 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 		i++;
 	}
 	return (0);
+}
+
+
+void	print_status( void ) {
+
+	vga_buffer[155] = (screen + '1') | WHITE << 8;
+	vga_buffer[155 + 80] = (isCapsPressed + '0') | WHITE << 8;
+	vga_buffer[155 + 80 * 2] = (isShiftPressed + '0') | WHITE << 8;
+	vga_buffer[155 + 80 * 3] = (isCtrlPressed + '0') | WHITE << 8;
 }

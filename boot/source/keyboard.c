@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/20 15:38:58 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:02:51 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ void    print_letters(uint8 scancode) {
             if (scancode == 0x26)
 			{
 				clear_screen(100);
-                clear_screen(screen);                        //TODO faire revenir le clearscreen au début et afficher le kfs-1 >
+                clear_screen(screen);                                   //TODO faire revenir le clearscreen au début et afficher le kfs-1 >
 				ft_prompt();
 			}
             if (scancode == 0x0E) {
-                                                              //TODO faire le ctrl + backspace pour retirer un mot entier
+                                                                        //TODO faire le ctrl + backspace pour retirer un mot entier
             }
         }
         else if (isShiftPressed == 1 || isCapsPressed == 1)             //SHIFT HANDLER

@@ -6,23 +6,24 @@ uint16	terminal_buffer[2][VGA_ADDRESS];
 uint32	terminal_index[2];
 uint32	vga_index;
 uint32	screen = 0;
+uint32	line_size[2];
 
 void	clear_screen2(int this_screen)
 {
-	ft_memset(terminal_buffer[this_screen], 0x00, 80 * 25);
+	ft_memset(terminal_buffer[this_screen], 0x00, 80 * 25 * 2);
 	terminal_index[this_screen] = 0;
+	line_size[this_screen] = 0;
 }
 
 void	clear_screen(int this_screen)
 {
 	if (this_screen == 100)
 	{
-		ft_memset(vga_buffer, 0x00, 80 * 25);
+		ft_memset(vga_buffer, 0x00, 80 * 25 * 2);
 		vga_index = 0;
 	}
 	else
 		clear_screen2(this_screen);
-
 }
 
 void	ft_switch_screen()
@@ -60,6 +61,7 @@ void	print_string(char* str, unsigned char color)
 		}
 		terminal_index[screen]++;
         index++;
+		line_size[screen]++;
     }
 }
 
@@ -74,28 +76,18 @@ void	print_char(char str, unsigned char color)
     terminal_index[screen]++;
 }
 
-int	ft_isprompt()
-{
-	int prompt[8] = {'k', 'f', 's', '-', '1', ' ', '>',};
-
-	for(int i = 0; i < 8; i++)
-	{
-		if (terminal_buffer[screen][terminal_index[screen] - 8 + i] != prompt[i])
-			return (0);
-	}
-	return (1);
-}
-
 void	ft_backspace()
 {
-	if (ft_isprompt())
-		print_string("ASKIP y'a le prompt", WHITE);
 	if (terminal_index[screen] % 80 != 0)
 	{
+		// ft_putnbr(line_size[screen], WHITE);
+		if (line_size[screen] <= 80 - 8 && terminal_index[screen] % 80 <= 8)
+			return ;
 		terminal_index[screen]--;
 		terminal_buffer[screen][terminal_index[screen]] = ' ';
 		// vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
 		vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
+		line_size[screen]--;
 	}
 }
 
@@ -120,6 +112,7 @@ void	ft_prompt()
     print_string("|       42  .d4242   |                                    |    CTRL            |", color42);
     print_string("*--------------------*------------------------------------*--------------------*\n", color42);
 
+	line_size[screen] = 0;
     print_string("kfs-1 > ", L_BLUE);
 }
 

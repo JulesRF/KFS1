@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:33:55 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/21 13:41:42 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:16:41 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,44 @@ void    modify_cursor_position( uint16 pos ){
     outb(0x3D4, 0x0E);
     outb(0x3D5, (uint8) ((pos >> 8) & 0xFF));
 }
-        // DELETE THE CURSOR
-        // outb(0x3D4, 0x0A);
-	    // outb(0x3D5, 0x20);
 
 //
 
-void shell_ter( void ) {
+void	reset_cursor()
+{
+	vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
+	vga_buffer[terminal_index[screen] + 1] = (unsigned short)' ' | (unsigned short)WHITE << 8;
+	uint16 tmp_pos = terminal_index[screen] + 1;              //TODO imprimer un espace toujours devant le dernier char
+	modify_cursor_position(tmp_pos - 1);
+	print_status();
+}
 
+void shell_ter( void ) {
+	
 	ft_prompt();
 	screen = 1;
 	ft_prompt();
 	screen = 0;
 
+		vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
 		vga_buffer[terminal_index[screen] + 1] = (unsigned short)' ' | (unsigned short)WHITE << 8;
         uint16 tmp_pos = terminal_index[screen] + 1;              //TODO imprimer un espace toujours devant le dernier char
         modify_cursor_position(tmp_pos - 1);
         print_status();
     
     while(69) {
+        
+        // else if (scancode <= 0x39 + 0x80) {
+            
+        //     print_string("Key up", WHITE);
+        //     print_char(scancode - 0x80, WHITE);
+        // }
+        
+        // DELETE THE CURSOR
+        // outb(0x3D4, 0x0A);
+	    // outb(0x3D5, 0x20);
 
+        
         keyboard_init();
 		vga_buffer[terminal_index[screen] + 1] = (unsigned short)' ' | (unsigned short)WHITE << 8;
         uint16 pos = terminal_index[screen] + 1;              //TODO imprimer un espace toujours devant le dernier char

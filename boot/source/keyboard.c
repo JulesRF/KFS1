@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/20 16:02:51 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:19:59 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int     isShiftPressed = 0;
 int     isCapsPressed  = 0;
 int     isCtrlPressed  = 0;
 
-uint8 keyboard_read_input(){
+uint8 keyboard_read_input() {
 
     while(!(inb(0x64) & 1));
     return inb(0x60);
@@ -88,7 +88,7 @@ void    print_letters(uint8 scancode) {
         else
             print_string(scancode_strings[scancode], temp_color);
 
-        if (scancode == 0x1C)
+        if (scancode == 0x1C)											//ENTER HANDLER
             print_string("kfs-1 > ", L_BLUE);
 
     } else if (scancode >= 0x3B && scancode <=0x44 ) {                  //F1-F10 PRESS

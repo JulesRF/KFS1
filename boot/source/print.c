@@ -59,7 +59,6 @@ void	print_string(char* str, unsigned char color)
 			vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
 		}
 		terminal_index[screen]++;
-		// terminal_index[0]++;
         index++;
     }
 }
@@ -75,8 +74,22 @@ void	print_char(char str, unsigned char color)
     terminal_index[screen]++;
 }
 
+int	ft_isprompt()
+{
+	int prompt[8] = {'k', 'f', 's', '-', '1', ' ', '>',};
+
+	for(int i = 0; i < 8; i++)
+	{
+		if (terminal_buffer[screen][terminal_index[screen] - 8 + i] != prompt[i])
+			return (0);
+	}
+	return (1);
+}
+
 void	ft_backspace()
 {
+	if (ft_isprompt())
+		print_string("ASKIP y'a le prompt", WHITE);
 	if (terminal_index[screen] % 80 != 0)
 	{
 		terminal_index[screen]--;
@@ -182,6 +195,21 @@ void	isOn(int status, int pos) {
 		vga_buffer[pos + 2] = (' ') | isOnColor << 8;
 	}
 }
+
+int	ft_strncmp(const char *s1, const char *s2, int n)
+{
+	int	i;
+
+	i = 0;
+	while (((unsigned char)s1[i] || (unsigned char)s2[i]) && i < n)
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}
+
 
 void	print_status( void ) {
 

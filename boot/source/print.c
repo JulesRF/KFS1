@@ -94,7 +94,8 @@ void	ft_backspace()
 	{
 		terminal_index[screen]--;
 		terminal_buffer[screen][terminal_index[screen]] = ' ';
-		vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
+		// vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
+		vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
 	}
 }
 
@@ -209,7 +210,6 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 	}
 	return (0);
 }
-
 
 void	print_status( void ) {
 

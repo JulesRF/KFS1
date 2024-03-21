@@ -28,6 +28,7 @@ extern uint16	terminal_buffer[2][VGA_ADDRESS];
 extern uint32	terminal_index[2];
 extern uint32	vga_index;
 extern uint32	screen;
+extern uint32	line_size[2];
 
 void    clear_screen(int screen);
 void	ft_switch_screen();

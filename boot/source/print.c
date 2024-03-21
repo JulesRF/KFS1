@@ -164,10 +164,29 @@ void    *ft_memset(void *b, int c, uint16 len)
     return (dest);
 }
 
+void	isOn(int status, int pos) {
+
+
+	if (status == 0) {
+
+		int	isOnColor = L_RED;
+		vga_buffer[pos] = ('O') | isOnColor << 8;
+		vga_buffer[pos + 1] = ('F') | isOnColor << 8;
+		vga_buffer[pos + 2] = ('F') | isOnColor << 8;
+	}
+	else {
+
+		int	isOnColor = L_GREEN;
+		vga_buffer[pos] = ('O') | isOnColor << 8;
+		vga_buffer[pos + 1] = ('N') | isOnColor << 8;
+		vga_buffer[pos + 2] = (' ') | isOnColor << 8;
+	}
+}
+
 void	print_status( void ) {
 
-	vga_buffer[155] = (screen + '1') | WHITE << 8;
-	vga_buffer[155 + 80] = (isCapsPressed + '0') | WHITE << 8;
-	vga_buffer[155 + 80 * 2] = (isShiftPressed + '0') | WHITE << 8;
-	vga_buffer[155 + 80 * 3] = (isCtrlPressed + '0') | WHITE << 8;
+	vga_buffer[154] = (screen + '1') | WHITE << 8;
+	isOn(isCapsPressed, 154 + 80);
+	isOn(isShiftPressed, 154 + 80 * 2);
+	isOn(isCtrlPressed, 154 + 80 * 3);
 }

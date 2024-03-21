@@ -31,8 +31,3 @@ int	main(void)
     shell_ter();
     // return 0 ;
 }
-
-
- //le 0 dans print_string sert à sélectionner le terminal sur lequel afficher
- //pourrait être simplié en regardant directement une variable globale à 0 ou 1 selon le screen
- //on pourrait donc ne pas avoir besoin de faire passer en paramètres

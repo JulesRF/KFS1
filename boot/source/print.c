@@ -46,6 +46,24 @@ void	ft_switch_screen()
 	print_status();	
 }
 
+void	ft_scroll_screen()
+{
+	int	index = 7 * 80;
+
+	while(index < 80 * 25 * 2 - 80)
+	{
+		terminal_buffer[screen][index] = terminal_buffer[screen][index + 80];
+		vga_buffer[index] = vga_buffer[index + 80];
+		index++;
+	}
+	ft_memset(terminal_buffer[screen] + index, 0x00, 80 * 2);
+	ft_memset(vga_buffer + index, 0x00, 80 * 2);
+	terminal_index[screen] -= 80;
+	// print_string("kfs-1 > ", L_BLUE);
+	line_size[screen] = 0;
+	reset_cursor();
+}
+
 void	print_string(char* str, unsigned char color)
 {
     int index = 0;
@@ -56,6 +74,8 @@ void	print_string(char* str, unsigned char color)
 			ft_backspace();
 		else if (str[index] != '\n')
 		{
+			if (terminal_index[screen] == 80 * 25)
+				ft_scroll_screen();
 	        terminal_buffer[screen][terminal_index[screen]] = (unsigned short)str[index] | (unsigned short)color << 8;
 			vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
 		}

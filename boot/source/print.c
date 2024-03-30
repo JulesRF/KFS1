@@ -109,6 +109,13 @@ void	ft_backspace()
 		vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
 		line_size[screen]--;
 	}
+	else if (terminal_index[screen] % 80 == 0)
+	{
+		terminal_index[screen]--;
+		terminal_buffer[screen][terminal_index[screen]] = ' ';
+		vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
+		line_size[screen]--;
+	}
 }
 
 int	ft_isnewl(const char *str, int i)

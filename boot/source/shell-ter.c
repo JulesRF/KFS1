@@ -32,11 +32,15 @@ void    modify_cursor_position( uint16 pos ){
     outb(0x3D4, 0x0E);
     outb(0x3D5, (uint8) ((pos >> 8) & 0xFF));
 }
-        // DELETE THE CURSOR
-        // outb(0x3D4, 0x0A);
-	    // outb(0x3D5, 0x20);
 
-//
+void	reset_cursor()
+{
+	vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
+	vga_buffer[terminal_index[screen] + 1] = (unsigned short)' ' | (unsigned short)WHITE << 8;
+	uint16 tmp_pos = terminal_index[screen] + 1;              //TODO imprimer un espace toujours devant le dernier char
+	modify_cursor_position(tmp_pos - 1);
+	print_status();
+}
 
 void shell_ter( void ) {
 

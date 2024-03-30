@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/21 14:31:57 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:23:11 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,24 @@ void    print_letters(uint8 scancode) {
             isShiftPressed = 0;
         if (scancode - 0x80 == 0x1D)                                    // CTRL RELEASE
             isCtrlPressed = 0;
-    } else {                                                            //scancode debug
+	} else if (scancode == 0xCB || scancode == 0xC8 || scancode == 0xCD || scancode == 0xD0) {
+		
+		switch (scancode) {												//ARROWS HANDLER
+			case 0xCB:
+				// print_string("left", L_CYAN);
+				break;
+			case 0xC8:
+				// print_string("up", L_CYAN);
+				break;
+			case 0xCD:
+				// print_string("right", L_CYAN);
+				break;
+			case 0xD0:
+				// print_string("down", L_CYAN);
+				break;
+		}
+				
+	} else {                                                            //scancode debug
 
         // print_string("Unknown key\n", temp_color);
         // ft_putnbr_hex(scancode, RED);

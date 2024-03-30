@@ -231,3 +231,7 @@ void	print_status( void ) {
 	isOn(isShiftPressed, 154 + 80 * 2);
 	isOn(isCtrlPressed, 154 + 80 * 3);
 }
+
+
+
+// pitie laisse moi push

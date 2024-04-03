@@ -60,7 +60,7 @@ void	ft_scroll_screen()
 	ft_memset(vga_buffer + index, 0x00, 80 * 2);
 	terminal_index[screen] -= 80;
 	// print_string("kfs-1 > ", L_BLUE);
-	line_size[screen] = 0;
+	// line_size[screen] = 0;
 	reset_cursor();
 }
 

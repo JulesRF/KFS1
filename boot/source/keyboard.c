@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:06:33 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/21 16:23:11 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:28:10 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void    print_letters(uint8 scancode) {
         else
             print_string(scancode_strings[scancode], temp_color);
 
-        if (scancode == 0x1C)											//SPACE HANDLER
+        if (scancode == 0x1C && isCtrlPressed == 0)											//SPACE HANDLER
 		{
             print_string("kfs-1 > ", L_BLUE);
 			line_size[screen] = 0;

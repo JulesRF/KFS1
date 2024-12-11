@@ -6,7 +6,7 @@
 /*   By: rdel-agu <rdel-agu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:33:55 by rdel-agu          #+#    #+#             */
-/*   Updated: 2024/03/21 16:22:58 by rdel-agu         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:35:40 by rdel-agu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	reset_cursor()
 {
 	vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
 	vga_buffer[terminal_index[screen] + 1] = (unsigned short)' ' | (unsigned short)WHITE << 8;
-	uint16 tmp_pos = terminal_index[screen] + 1;              //TODO imprimer un espace toujours devant le dernier char
+	uint16 tmp_pos = terminal_index[screen] + 1;
 	modify_cursor_position(tmp_pos - 1);
 	print_status();
 }
@@ -51,7 +51,7 @@ void shell_ter( void ) {
 
 		vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
     	vga_buffer[terminal_index[screen] + 1] = (unsigned short)' ' | (unsigned short)WHITE << 8;
-		uint16 tmp_pos = terminal_index[screen] + 1;              //TODO imprimer un espace toujours devant le dernier char
+		uint16 tmp_pos = terminal_index[screen] + 1;
         modify_cursor_position(tmp_pos - 1);
         print_status();
     
@@ -60,8 +60,8 @@ void shell_ter( void ) {
         keyboard_init();
 		vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
 		vga_buffer[terminal_index[screen] + 1] = (unsigned short)' ' | (unsigned short)WHITE << 8;
-		uint16 pos = terminal_index[screen] + 1;              //TODO imprimer un espace toujours devant le dernier char
-        modify_cursor_position(pos - 1);        // pour pouvoir afficher le curseur devant
+		uint16 pos = terminal_index[screen] + 1;
+        modify_cursor_position(pos - 1);
         print_status();
     }
 }

@@ -29,7 +29,6 @@ void	clear_screen(int this_screen)
 void	ft_switch_screen()
 {
 	unsigned int index = 0;
-	// int old_screen;
 
 	clear_screen(100);
 	if (screen == 0)
@@ -38,7 +37,6 @@ void	ft_switch_screen()
 		screen = 0;
 	while (index < 80 * 25 * 2)
 	{
-		// if (terminal_buffer[screen][index] >= 32 && terminal_buffer[screen][index] <= 126)
 		vga_buffer[index] = terminal_buffer[screen][index];
 		index++;
 	}
@@ -59,8 +57,6 @@ void	ft_scroll_screen()
 	ft_memset(terminal_buffer[screen] + index, 0x00, 80 * 2);
 	ft_memset(vga_buffer + index, 0x00, 80 * 2);
 	terminal_index[screen] -= 80;
-	// print_string("kfs-1 > ", L_BLUE);
-	// line_size[screen] = 0;
 	reset_cursor();
 }
 
@@ -100,12 +96,10 @@ void	ft_backspace()
 {
 	if (terminal_index[screen] % 80 != 0)
 	{
-		// ft_putnbr(line_size[screen], WHITE);
 		if (line_size[screen] <= 80 - 8 && terminal_index[screen] % 80 <= 8)
 			return ;
 		terminal_index[screen]--;
 		terminal_buffer[screen][terminal_index[screen]] = ' ';
-		// vga_buffer[terminal_index[screen]] = terminal_buffer[screen][terminal_index[screen]];
 		vga_buffer[terminal_index[screen]] = (unsigned short)' ' | (unsigned short)WHITE << 8;
 		line_size[screen]--;
 	}
@@ -200,7 +194,6 @@ void    *ft_memset(void *b, int c, uint16 len)
 
 void	isOn(int status, int pos) {
 
-
 	if (status == 0) {
 
 		int	isOnColor = L_RED;
@@ -238,7 +231,5 @@ void	print_status( void ) {
 	isOn(isShiftPressed, 154 + 80 * 2);
 	isOn(isCtrlPressed, 154 + 80 * 3);
 }
-
-
 
 // pitie laisse moi push
